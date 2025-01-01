@@ -129,7 +129,6 @@
         const profileLink = document.getElementById('profileLink');
         const takeQuizLink = document.getElementById('takeQuizLink');
         const profileContent = document.getElementById('profileContent');
-        // const takeQuizContent = document.getElementById('takeQuizContent');
 
         // Toggle Sidebar
         toggleButton.addEventListener('click', () => {
@@ -163,14 +162,10 @@
 
         // Take Quiz Link Click - Fetch Take Quiz Data Dynamically
         takeQuizLink.addEventListener('click', (e) => {
-            e.preventDefault();  // Prevent default link behavior
-
-            // Fetch quiz content
+            e.preventDefault();
             fetch('take_quiz.php')
-
                 .then(response => response.text())
                 .then(data => {
-                    // Insert the quiz data into the content section
                     profileContent.innerHTML = data;
                 })
                 .catch(error => {
