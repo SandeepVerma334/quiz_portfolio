@@ -16,7 +16,11 @@
             flex-direction: column;
             min-height: 100vh;
         }
-
+        button.cross {
+            left: 13rem;
+            font-size: 18px;
+            padding: 3px 8px 3px 8px;
+        }
         .sidebar {
             width: 250px;
             background-color: #34495e;
@@ -100,9 +104,9 @@
     <div class="sidebar" id="sidebar">
         <h3>Dashboard</h3>
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#profile">Profile</a></li>
-            <li><a href="#take-quiz">Take Quiz</a></li>
+            <li><a href="#" id="homeLink">Home</a></li>
+            <li><a href="#" id="profileLink">Profile</a></li>
+            <li><a href="#" id="takeQuizLink">Take Quiz</a></li>
             <li><a href="#results">Results</a></li>
         </ul>
     </div>
@@ -114,18 +118,18 @@
     <div class="content" id="content">
         <h2 id="home">Welcome to the User Dashboard</h2>
         <p>Use the menu to navigate through different sections of the dashboard.</p>
-        <h3 id="profile" class="mt-5">Profile</h3>
-        <p>View and manage your profile details.</p>
-        <h3 id="take-quiz" class="mt-5">Take Quiz</h3>
-        <p>Start a quiz to test your knowledge.</p>
-        <h3 id="results" class="mt-5">Results</h3>
-        <p>View your quiz results here.</p>
+        <div id="profileContent"></div>
+        <div id="takeQuizContent"></div>
     </div>
 
     <script>
         const sidebar = document.getElementById('sidebar');
         const toggleButton = document.getElementById('toggleButton');
         const content = document.getElementById('content');
+        const profileLink = document.getElementById('profileLink');
+        const takeQuizLink = document.getElementById('takeQuizLink');
+        const profileContent = document.getElementById('profileContent');
+        // const takeQuizContent = document.getElementById('takeQuizContent');
 
         // Toggle Sidebar
         toggleButton.addEventListener('click', () => {
@@ -138,6 +142,41 @@
             } else {
                 toggleButton.classList.replace('cross', 'menu');
             }
+        });
+
+        // Profile Link Click - Fetch Profile Data Dynamically
+        profileLink.addEventListener('click', (e) => {
+            e.preventDefault();  // Prevent default link behavior
+
+            // Fetch profile content
+            fetch('profile.php')
+                .then(response => response.text())
+                .then(data => {
+                    // Insert the profile data into the content section
+                    profileContent.innerHTML = data;
+                })
+                .catch(error => {
+                    profileContent.innerHTML = "<p>Error loading profile data.</p>";
+                    console.error('Error fetching profile:', error);
+                });
+        });
+
+        // Take Quiz Link Click - Fetch Take Quiz Data Dynamically
+        takeQuizLink.addEventListener('click', (e) => {
+            e.preventDefault();  // Prevent default link behavior
+
+            // Fetch quiz content
+            fetch('take_quiz.php')
+
+                .then(response => response.text())
+                .then(data => {
+                    // Insert the quiz data into the content section
+                    profileContent.innerHTML = data;
+                })
+                .catch(error => {
+                    profileContent.innerHTML = "<p>Error loading quiz data.</p>";
+                    console.error('Error fetching quiz:', error);
+                });
         });
     </script>
 </body>
