@@ -2,6 +2,7 @@
 include("db.php");
 session_start();
 
+// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -9,9 +10,30 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Fetch questions for the quiz
-$questionsQuery = "SELECT id, question, answer FROM questions ORDER BY RAND() LIMIT 10";
-$result = mysqli_query($conn, $questionsQuery);
+// Fetch questions that the user has already attempted (using `ques_id` from `result` table)
+$attemptedQuery = "SELECT ques_id FROM result WHERE user_id = '$user_id'";
+$attemptedResult = mysqli_query($conn, $attemptedQuery);
+
+if (!$attemptedResult) {
+    die("Error executing query: " . mysqli_error($conn));
+}
+
+$attemptedQuestions = mysqli_fetch_all($attemptedResult, MYSQLI_ASSOC);
+$attemptedQuestionIds = array_column($attemptedQuestions, 'ques_id');
+
+// Calculate the number of remaining questions to display (limit to 10 total)
+$remainingQuestionsCount = 10 - count($attemptedQuestionIds);
+
+// If no questions attempted, show 10 random questions
+if (count($attemptedQuestionIds) > 0) {
+    // Exclude attempted questions from the list using `NOT IN` and `ques_id`
+    $remainingQuestionsQuery = "SELECT id, question, answer FROM questions WHERE id NOT IN (" . implode(",", $attemptedQuestionIds) . ") ORDER BY RAND() LIMIT $remainingQuestionsCount";
+} else {
+    // If no questions attempted yet, just fetch 10 random questions
+    $remainingQuestionsQuery = "SELECT id, question, answer FROM questions ORDER BY RAND() LIMIT 10";
+}
+
+$result = mysqli_query($conn, $remainingQuestionsQuery);
 
 if (!$result) {
     die("Error executing query: " . mysqli_error($conn));
@@ -19,7 +41,7 @@ if (!$result) {
 
 $questions = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-echo '<form id="quizForm">';
+echo '<form id="quizForm" method="POST" action="insertResult.php">';
 
 foreach ($questions as $index => $q) {
     // Display question
@@ -41,10 +63,14 @@ foreach ($questions as $index => $q) {
 
     // Hidden field for the correct answer
     echo '<input type="hidden" name="correct_q' . $index . '" value="' . $correct_a . '">';
+    
+    // Hidden field for the question ID
+    echo '<input type="hidden" name="question_' . $index . '" value="' . $q['id'] . '">';
+
     echo '<hr>';
 }
 
-echo '<button type="submit" id="submitBtn" class="btn btn-primary">Submit Quiz</button>';
+echo '<button type="submit" name="submit" id="submitQuizBtn" class="btn btn-primary">Submit Quiz</button>';
 echo '</form>';
 
 /**
@@ -87,3 +113,5 @@ function shuffleOptions($correct_a, $incorrectOptions)
     return $options;
 }
 ?>
+</body>
+</html>

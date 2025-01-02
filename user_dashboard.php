@@ -107,7 +107,7 @@
             <li><a href="#" id="homeLink">Home</a></li>
             <li><a href="#" id="profileLink">Profile</a></li>
             <li><a href="#" id="takeQuizLink">Take Quiz</a></li>
-            <li><a href="#results">Results</a></li>
+            <li><a href="#" id="quizResult">Results</a></li>
         </ul>
     </div>
 
@@ -128,6 +128,7 @@
         const content = document.getElementById('content');
         const profileLink = document.getElementById('profileLink');
         const takeQuizLink = document.getElementById('takeQuizLink');
+        const quizResult = document.getElementById('quizResult');
         const profileContent = document.getElementById('profileContent');
 
         // Toggle Sidebar
@@ -164,6 +165,19 @@
         takeQuizLink.addEventListener('click', (e) => {
             e.preventDefault();
             fetch('take_quiz.php')
+                .then(response => response.text())
+                .then(data => {
+                    profileContent.innerHTML = data;
+                })
+                .catch(error => {
+                    profileContent.innerHTML = "<p>Error loading quiz data.</p>";
+                    console.error('Error fetching quiz:', error);
+                });
+        });
+         // quizResult Link Click - Fetch quizResult Data Dynamically
+         quizResult.addEventListener('click', (e) => {
+            e.preventDefault();
+            fetch('result.php')
                 .then(response => response.text())
                 .then(data => {
                     profileContent.innerHTML = data;
