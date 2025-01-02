@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 01, 2025 at 02:04 PM
+-- Generation Time: Jan 02, 2025 at 06:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -250,6 +250,7 @@ CREATE TABLE `quiz_answer` (
 
 CREATE TABLE `result` (
   `id` int(255) NOT NULL,
+  `user_id` int(255) NOT NULL,
   `ques_id` int(255) NOT NULL,
   `user_email` varchar(255) NOT NULL,
   `user_ans` varchar(255) NOT NULL,
@@ -257,6 +258,32 @@ CREATE TABLE `result` (
   `is_correct` tinyint(255) NOT NULL,
   `createdAt` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `result`
+--
+
+INSERT INTO `result` (`id`, `user_id`, `ques_id`, `user_email`, `user_ans`, `correct_ans`, `is_correct`, `createdAt`) VALUES
+(11, 15, 52, '', 'angular', 'A `div` is a block-level element, while a `span` is an inline element.', 0, '2025-01-02 15:48:38.161920'),
+(12, 15, 46, '', 'html5', 'The `componentDidMount` method is called after a component has been rendered and mounted to the DOM.', 0, '2025-01-02 15:48:38.164775'),
+(13, 15, 129, '', 'bootstrap', 'Hash tables are data structures that map keys to values for fast lookup.', 0, '2025-01-02 15:48:38.166326'),
+(14, 15, 131, '', 'SEO', 'Dynamic programming is a technique for solving problems by breaking them into overlapping subproblems.', 0, '2025-01-02 15:48:38.168965'),
+(15, 15, 97, '', 'jquery', 'array.push(element);', 0, '2025-01-02 15:48:38.171500'),
+(16, 15, 35, '', 'perl', '`useState` is a React hook that allows you to add state to functional components.', 0, '2025-01-02 15:48:38.173038'),
+(17, 15, 26, '', 'golang', 'Aggregation is a way to process data records and return computed results, similar to SQL GROUP BY.', 0, '2025-01-02 15:48:38.174590'),
+(18, 17, 66, '', 'rust', '<br>', 0, '2025-01-02 16:27:26.039017'),
+(19, 17, 24, '', 'Redux is a state management library for JavaScript apps, often used with React to manage app state.', 'Redux is a state management library for JavaScript apps, often used with React to manage app state.', 1, '2025-01-02 16:27:26.041849'),
+(20, 17, 93, '', 'prisma()', '<table>', 0, '2025-01-02 16:32:58.204074'),
+(21, 17, 2, '', 'xml', 'PHP supports dynamic typing, functions, and object-oriented programming.', 0, '2025-01-02 16:32:58.206871'),
+(22, 17, 93, '', 'prisma()', '<table>', 0, '2025-01-02 16:33:28.440582'),
+(23, 17, 2, '', 'xml', 'PHP supports dynamic typing, functions, and object-oriented programming.', 0, '2025-01-02 16:33:28.442581'),
+(24, 17, 167, '', 'SEO', '`==` compares references, while `.equals()` compares values.', 0, '2025-01-02 16:35:42.776571'),
+(25, 17, 5, '', 'SEO', 'React.js is a JavaScript library for building user interfaces, especially single-page applications.', 0, '2025-01-02 16:39:31.712932'),
+(26, 17, 177, '', 'symfony', 'PUT updates the entire resource, while PATCH updates only specific fields.', 0, '2025-01-02 16:40:00.579263'),
+(27, 17, 95, '', 'ruby', '<th>', 0, '2025-01-02 16:40:00.582161'),
+(28, 19, 137, '', 'xml', 'An API (Application Programming Interface) allows communication between software applications.', 0, '2025-01-02 17:03:42.623857'),
+(29, 19, 183, '', 'Cross-Origin Resource Sharing is a mechanism to allow restricted resources on a web page to be requested from another domain.', 'Cross-Origin Resource Sharing is a mechanism to allow restricted resources on a web page to be requested from another domain.', 1, '2025-01-02 17:03:42.626894'),
+(30, 19, 146, '', 'SQL databases use a normalized schema, while MongoDB is schema-less.', 'True', 0, '2025-01-02 17:03:42.629236');
 
 -- --------------------------------------------------------
 
@@ -284,17 +311,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `email`, `tags`, `role`, `gender`, `description`, `password`, `created_at`, `file`) VALUES
-(1, 'Nita', 'Sierra Love', 'Sherman', 'pexiq@mailinator.com', NULL, 'Admin', 'other', 'Qui non et soluta di', 'Pa$$w0rd!', '2025-01-01 09:18:37', 'rb_66113.png'),
-(2, 'Miriam', 'Virginia Banks', 'Kim', 'vuqotiw@mailinator.com', 'User', '', 'male', 'Sed natus amet temp', 'Pa$$w0rd!', '2025-01-01 09:20:35', 'fc00.png'),
-(5, 'Hilary', 'Scott Haynes', 'Macdonald', 'qusicok@mailinator.com', 'User', '', 'male', 'Nesciunt accusamus ', 'Pa$$w0rd!', '2025-01-01 09:23:20', 'coder.jpg'),
-(6, 'Destiny', 'Gemma Pena', 'Melton', 'qidy@mailinator.com', 'User', '', 'male', 'Dicta fugiat aspern', 'Pa$$w0rd!', '2025-01-01 09:24:32', 'Firefly cute 10 year old anime girl with long straight black hair, reddish brown eyes and pale skin  (1).jpg'),
-(8, 'Justine', 'Ursula Rocha', 'Price', 'syxogo@mailinator.com', '', 'Admin', 'other', 'Qui nesciunt ullam ', 'Pa$$w0rd!', '2025-01-01 09:26:58', 'Firefly cute 10 year old anime girl with long straight black hair, reddish brown eyes and pale skin  (2).jpg'),
-(10, 'Amir', 'Robert Ball', 'Anderson', 'nevexyge@mailinator.com', '', 'Admin', 'male', 'Sed illum rerum quo', 'Pa$$w0rd!', '2025-01-01 09:29:29', 'fc00.png'),
-(11, 'Carlos', 'Tatum Stephens', 'Chase', 'jojunimi@mailinator.com', '', 'Admin', 'male', 'Nisi qui consequat ', 'Pa$$w0rd!', '2025-01-01 09:30:06', 'WhatsApp Image 2024-10-29 at 9.13.22 PM (1).jpeg'),
-(12, 'Dana', 'Amy Vargas', 'Fletcher', 'refyniru@mailinator.com', '', 'User', 'male', 'Deserunt pariatur T', 'Pa$$w0rd!', '2025-01-01 09:32:16', 'WhatsApp Image 2024-10-29 at 9.13.25 PM (1).jpeg'),
-(14, 'sandeep', 'verma', 'ratiwal', 'sandeep@gmail.com', '', 'Admin', 'male', 'testing entry', 'test', '2025-01-01 09:42:19', 'pexels-grizzlybear-1237119.jpg'),
-(15, 'Lysandra', 'Cherokee Finch', 'Todd', 'zihimyl@mailinator.com', '', 'User', 'female', 'Assumenda maxime hic', 'Pa$$w0rd!', '2025-01-01 09:45:37', 'pexels-pixabay-355853.jpg'),
-(16, 'Hammett', 'Xander Mullen', 'Salinas', 'jiqo@mailinator.com', 'Ut voluptas voluptas,jsdhfkjsf', 'Admin', 'female', 'Et nulla quidem in i', 'Pa$$w0rd!', '2025-01-01 09:52:16', 'pexels-rpnickson-2885320.jpg');
+(17, 'sandeep', 'kumar', 'ratiwal', 'sandeep@gmail.com', 'test', 'User', 'male', 'test', 'test', '2025-01-02 16:08:52', 'Firefly cute 10 year old anime girl with long straight black hair, reddish brown eyes and pale skin  (1).jpg'),
+(18, 'Admin', 'verma', 'ratiwal', 'admin@gmail.com', 'admin', 'Admin', 'male', 'Admin', 'admin', '2025-01-02 16:09:45', 'avatar-3637425_1280.png'),
+(19, 'suman', 'verma', '', 'suman@gmail.com', 'suman,user', 'User', 'female', 'Suman User Testing', '123', '2025-01-02 17:03:10', 'Firefly cute 10 year old anime girl with long straight black hair, reddish brown eyes and pale skin .jpg');
 
 --
 -- Indexes for dumped tables
@@ -345,13 +364,13 @@ ALTER TABLE `quiz_answer`
 -- AUTO_INCREMENT for table `result`
 --
 ALTER TABLE `result`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
