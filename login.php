@@ -14,13 +14,14 @@ if (isset($_POST["submit"])) {
     $result = $conn->query($query);
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        if ($password === $user["password"]) {
+        if ($password === $user["password"]) {            
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['first_name'] = $user['first_name'];
             $_SESSION['last_name'] = $user['last_name'];
             $_SESSION['email'] = $user['email'];
             $_SESSION['role'] = $user['role'];
             $_SESSION['description'] = $user['description'];
+            $_SESSION['tags'] = $user['tags'];
             if ($role == 'Admin') {
                 header("Location: admin_dashboard.php");
             } else {

@@ -1,3 +1,10 @@
+<?php 
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'User') {
+    header("Location: login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,6 +111,7 @@
     <div class="sidebar" id="sidebar">
         <h3>Dashboard</h3>
         <ul>
+            <li><button onclick="window.location.href='logout.php'">Logout</button></li>
             <li><a href="#" id="homeLink">Home</a></li>
             <li><a href="#" id="profileLink">Profile</a></li>
             <li><a href="#" id="takeQuizLink">Take Quiz</a></li>
