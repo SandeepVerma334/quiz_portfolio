@@ -2,15 +2,11 @@
 include("db.php");
 session_start();
 
-// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
-
 $user_id = $_SESSION['user_id'];
-
-// Fetch questions that the user has already attempted (using `ques_id` from `result` table)
 $attemptedQuery = "SELECT ques_id FROM result WHERE user_id = '$user_id'";
 $attemptedResult = mysqli_query($conn, $attemptedQuery);
 
@@ -20,6 +16,12 @@ if (!$attemptedResult) {
 
 $attemptedQuestions = mysqli_fetch_all($attemptedResult, MYSQLI_ASSOC);
 $attemptedQuestionIds = array_column($attemptedQuestions, 'ques_id');
+
+// Check if the user has attempted all 10 questions
+if (count($attemptedQuestionIds) >= 10) {
+    echo "<p>You have already submitted the quiz.</p>";
+    exit();
+}
 
 // Calculate the number of remaining questions to display (limit to 10 total)
 $remainingQuestionsCount = 10 - count($attemptedQuestionIds);
@@ -43,14 +45,9 @@ $questions = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 echo '<form id="quizForm" method="POST" action="insertResult.php">';
 
-foreach ($questions as $index => $q) {
-    // Display question
-    echo "<p>Q" . ($index + 1) . ". " . $q['question'] . "</p>";
-
-    // Get correct answer
-    $correct_a = $q['answer'];
-
-    // Generate incorrect options
+foreach ($questions as $index => $q) {    
+    echo "<p>Q" . ($index + 1) . ". " . $q['question'] . "</p>";    
+    $correct_a = $q['answer'];    
     $incorrectOptions = generateIncorrectOptions($correct_a);
 
     // Shuffle options (correct + 3 random incorrect options)
@@ -79,10 +76,10 @@ echo '</form>';
 function generateIncorrectOptions($correct_a)
 {
     $incorrectOptions = [
-        'ruby', 'swift', 'typescript', 'kotlin', 'golang', 'rust', 'scala', 'perl',
-        'jquery', 'bootstrap', 'laravel', 'django', 'react', 'angular', 'vue.js',
-        'flutter', 'node.js', 'git', 'docker', 'aws', 'azure', 'rails', 'express',
-        'symfony', 'html5', 'css3', 'xml', 'json', 'markdown', 'xcode', 'android',
+        'Ruby is another programming language but different from PHP.', ' Python is a versatile language, but it is not PHP.', 'React.js is a front-end library, not a runtime environment.', 'kotlin', 'Laravel is a PHP framework, not a Node.js framework.', 'rust', 'Vue.js is another JavaScript framework, not React.js', 'perl',
+        'jquery', 'bootstrap', 'laravel', 'Angular is a front-end framework, not a server-side framework like Express.', 'react', 'HTML Elements: HTML elements are part of the DOM, not React components.', 'CSS Classes: CSS classes are used for styling, not for creating UI components in React.',
+        'Svelte is a different framework, not React-based.', 'Client-side rendering is when JavaScript renders the content in the browser, not the server.', 'MySQL is a relational database, while MongoDB is a NoSQL database.', 'SQL databases use a normalized schema, while MongoDB is schema-less.', 'C++ is a compiled language, not a scripting language like JavaScript.', 'Array methods like map() or filter() aren t closures themselves.', 'rails', 'express',
+        'symfony', 'html5', 'css3', 'xml', 'json', 'Class selectors are used for multiple elements, not for parent-child relationships.', 'xcode', 'android',
         'print_r()', 'session()', 'prisma()', 'SEO'
     ];
 

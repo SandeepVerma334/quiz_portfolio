@@ -5,28 +5,36 @@ include("db.php");
 // Handle form submission
 if (isset($_POST["submit"])) {
     // Retrieve form data
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $role = $_POST['role'];
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+    $role = trim($_POST['role']);
 
     // Perform login logic
-    $query = "SELECT * FROM users WHERE email = '$email' AND role = '$role'";
-    $result = $conn->query($query);
+    $query = "SELECT * FROM users WHERE email = ? AND role = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ss", $email, $role);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        if ($password === $user["password"]) {            
+        if ($password === $user["password"]) {
+            // Set session variables
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['first_name'] = $user['first_name'];
             $_SESSION['last_name'] = $user['last_name'];
             $_SESSION['email'] = $user['email'];
             $_SESSION['role'] = $user['role'];
             $_SESSION['description'] = $user['description'];
-            $_SESSION['tags'] = $user['tags'];
-            if ($role == 'Admin') {
-                header("Location: admin_dashboard.php");
-            } else {
-                header("Location: user_dashboard.php"); 
-            }
+
+            // JavaScript-based redirection
+            $dashboard = $role === 'Admin' ? 'dashboard.php' : 'dashboard.php';
+            echo "<script>
+                alert('Login successful. Redirecting to your dashboard...');
+                setTimeout(function() {
+                    window.location.href = '$dashboard';
+                }, 2000);
+            </script>";
             exit();
         } else {
             echo "<script>alert('Incorrect password. Please try again.');</script>";
@@ -36,6 +44,8 @@ if (isset($_POST["submit"])) {
     }
 }
 ?>
+
+
 
 
 <!DOCTYPE html>

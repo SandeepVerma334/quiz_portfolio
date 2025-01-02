@@ -80,7 +80,7 @@ $totalQuestions = count($questionsData);
         }
         h1 {
             text-align: center;
-            color: #333;
+            color: #4CAF50;
         }
         table {
             width: 100%;
@@ -104,12 +104,17 @@ $totalQuestions = count($questionsData);
             font-size: 1.2rem;
             margin: 0.5rem 0;
         }
+        .redirect-section {
+            text-align: center;
+            margin-top: 30px;
+        }
     </style>
 </head>
 <body>
     
     <div class="container">
-        <h1>Quiz Result</h1>
+        <h1>Your Quiz Results Summary</h1>
+        <h3>Quiz Result</h3>
         <p>Total Questions: <?php echo $totalQuestions; ?></p>
         <p>Correct Answers: <?php echo $correctCount; ?></p>
         <p>Wrong Answers: <?php echo $wrongCount; ?></p>
@@ -142,6 +147,17 @@ $totalQuestions = count($questionsData);
                 <?php endforeach; ?>
             </tbody>
         </table>
+
+        <div class="redirect-section">
+            <p>You will be redirected to the dashboard in 3 seconds...</p>
+        </div>
     </div>
+
+    <script type="text/javascript">
+        // Redirect to the dashboard after 3 seconds
+        setTimeout(function() {
+            window.location.href = 'dashboard.php'; // Change this to the actual dashboard page URL
+        }, 3000); 
+    </script>
 </body>
 </html>

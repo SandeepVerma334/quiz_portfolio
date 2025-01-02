@@ -72,8 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <script type='text/javascript'>
                 setTimeout(function() {
-                    window.location.href = 'result.php?score=$score&total=$totalQuestions';
-                }, 3000); // Redirect after 3 seconds
+                    window.location.href = 'thankYou_page.php?score=$score&total=$totalQuestions';
+                }, 3000); 
             </script>
         </body>
         </html>

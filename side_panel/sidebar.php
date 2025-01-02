@@ -1,9 +1,20 @@
 <?php 
+session_start();
+include("db.php");
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'User') {
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+
+// Fetch user details from the session
+$user_id = $_SESSION['user_id'];
+$role = $_SESSION['role']; // Use the role directly from the session
+
+// Debugging purpose (optional, remove in production)
+// print_r($_SESSION);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,14 +119,19 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'User') {
 </head>
 <body>
     <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
+    <div class="sidebar container" id="sidebar">
         <h3>Dashboard</h3>
         <ul>
-            <li><button onclick="window.location.href='logout.php'">Logout</button></li>
-            <li><a href="#" id="homeLink">Home</a></li>
-            <li><a href="#" id="profileLink">Profile</a></li>
-            <li><a href="#" id="takeQuizLink">Take Quiz</a></li>
-            <li><a href="#" id="quizResult">Results</a></li>
+            <?php if ($role === 'Admin'): ?>
+                <li><button onclick="window.location.href='logout.php'">Logout</button></li>
+                <li><a href="#" id="profileLink">Profile</a></li>
+                <li><a href="#" id="usersLink">Users</a></li>
+            <?php else: ?>
+                <li><button onclick="window.location.href='logout.php'">Logout</button></li>
+                <li><a href="#" id="profileLink">Profile</a></li>
+                <li><a href="#" id="takeQuizLink">Take Quiz</a></li>
+                <li><a href="#" id="quizResult">Results</a></li>
+            <?php endif; ?>
         </ul>
     </div>
 
@@ -138,6 +154,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'User') {
         const takeQuizLink = document.getElementById('takeQuizLink');
         const quizResult = document.getElementById('quizResult');
         const profileContent = document.getElementById('profileContent');
+        const usersLink = document.getElementById('usersLink');
 
         // Toggle Sidebar
         toggleButton.addEventListener('click', () => {
@@ -153,48 +170,68 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'User') {
         });
 
         // Profile Link Click - Fetch Profile Data Dynamically
-        profileLink.addEventListener('click', (e) => {
-            e.preventDefault();  // Prevent default link behavior
+        if (profileLink) {
+            profileLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                fetch('profile.php')
+                    .then(response => response.text())
+                    .then(data => {
+                        profileContent.innerHTML = data;
+                    })
+                    .catch(error => {
+                        profileContent.innerHTML = "<p>Error loading profile data.</p>";
+                        console.error('Error fetching profile:', error);
+                    });
+            });
+        }
 
-            // Fetch profile content
-            fetch('profile.php')
-                .then(response => response.text())
-                .then(data => {
-                    // Insert the profile data into the content section
-                    profileContent.innerHTML = data;
-                })
-                .catch(error => {
-                    profileContent.innerHTML = "<p>Error loading profile data.</p>";
-                    console.error('Error fetching profile:', error);
-                });
-        });
+        // Users Link (for Admin)
+        if (usersLink) {
+            usersLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                fetch('users.php')
+                    .then(response => response.text())
+                    .then(data => {
+                        profileContent.innerHTML = data;
+                    })
+                    .catch(error => {
+                        profileContent.innerHTML = "<p>Error loading users data.</p>";
+                        console.error('Error fetching users:', error);
+                    });
+            });
+        }
 
         // Take Quiz Link Click - Fetch Take Quiz Data Dynamically
-        takeQuizLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            fetch('take_quiz.php')
-                .then(response => response.text())
-                .then(data => {
-                    profileContent.innerHTML = data;
-                })
-                .catch(error => {
-                    profileContent.innerHTML = "<p>Error loading quiz data.</p>";
-                    console.error('Error fetching quiz:', error);
-                });
-        });
-         // quizResult Link Click - Fetch quizResult Data Dynamically
-         quizResult.addEventListener('click', (e) => {
-            e.preventDefault();
-            fetch('result.php')
-                .then(response => response.text())
-                .then(data => {
-                    profileContent.innerHTML = data;
-                })
-                .catch(error => {
-                    profileContent.innerHTML = "<p>Error loading quiz data.</p>";
-                    console.error('Error fetching quiz:', error);
-                });
-        });
+        if (takeQuizLink) {
+            takeQuizLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                fetch('take_quiz.php')
+                    .then(response => response.text())
+                    .then(data => {
+                        profileContent.innerHTML = data;
+                    })
+                    .catch(error => {
+                        profileContent.innerHTML = "<p>Error loading quiz data.</p>";
+                        console.error('Error fetching quiz:', error);
+                    });
+            });
+        }
+
+        // Quiz Result Link Click - Fetch Quiz Result Data Dynamically
+        if (quizResult) {
+            quizResult.addEventListener('click', (e) => {
+                e.preventDefault();
+                fetch('result.php')
+                    .then(response => response.text())
+                    .then(data => {
+                        profileContent.innerHTML = data;
+                    })
+                    .catch(error => {
+                        profileContent.innerHTML = "<p>Error loading quiz results.</p>";
+                        console.error('Error fetching results:', error);
+                    });
+            });
+        }
     </script>
 </body>
 </html>
