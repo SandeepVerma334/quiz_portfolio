@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
 }
     // Validate passwords
     if ($password !== $confirm_password) {
-        echo "<script>alert('Passwords do not match!');</script>";
+        echo "<script>alert('Passwords do not match please try again letter!');</script>";
         echo "<script>window.location.href = 'register.php';</script>";
         exit();
     }
