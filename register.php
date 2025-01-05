@@ -116,9 +116,9 @@ if ($conn->query($iquery) === TRUE) {
         </div>
     </nav>
     <div class="container">
-    <h2 class="text-center">Class Registration</h2>
+    <h2 class="heading text-center">Class Registration</h2>
     <p class="text-center subtitle">Fill out the form carefully for registration</p>
-    <form id="registrationForm" action="process_registration.php" method="post" enctype="multipart/form-data">
+    <form id="registrationForm" action="#" method="post" enctype="multipart/form-data">
         <!-- Name Section -->
         <div class="row mb-3">
             <div class="col-md-4">

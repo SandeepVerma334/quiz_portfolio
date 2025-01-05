@@ -66,7 +66,7 @@ if (isset($_POST["submit"])) {
         </div>
     </nav>
     <div class="container">
-        <h2 class="text-center">Login</h2>
+        <h2 class="heading text-center">Login</h2>
         <p class="text-center subtitle">Please enter your credentials to login</p>
         <form action="" method="post">
             <div class="mb-3">
