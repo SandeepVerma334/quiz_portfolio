@@ -59,9 +59,15 @@ if (isset($_POST["submit"])) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<nav>
+        <div class="logo">
+            <img src="logo3.png" alt="logo" width="100px">
+        </div>
+    </nav>
     <div class="container">
         <h2 class="text-center">Login</h2>
-        <p class="text-center">Please enter your credentials to login</p>
+        <p class="text-center subtitle">Please enter your credentials to login</p>
         <form action="" method="post">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>

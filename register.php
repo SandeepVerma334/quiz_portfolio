@@ -110,105 +110,123 @@ if ($conn->query($iquery) === TRUE) {
     </style>
 </head>
 <body>
+    <nav>
+        <div class="logo">
+            <img src="logo3.png" alt="logo" width="100px">
+        </div>
+    </nav>
     <div class="container">
-        <h2 class="text-center">Class Registration</h2>
-        <p class="text-center">Fill out the form carefully for registration</p>
-        <form id="registrationForm" action="" method="post" enctype="multipart/form-data">
-            <div class="row mb-3">
-                <div class="col-md-4">
-                    <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" class="form-control" name="first_name" id="firstName" placeholder="First Name">
-                    <span class="error" id="errorFirstName"></span>
-                </div>
-                <div class="col-md-4">
-                    <label for="middleName" class="form-label">Middle Name</label>
-                    <input type="text" class="form-control" name="middle_name" id="middleName" placeholder="Middle Name">
-                    <span class="error" id="errorMiddleName"></span>
-                </div>
-                <div class="col-md-4">
-                    <label for="lastName" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" id="lastName" placeholder="Last Name">
-                    <span class="error" id="errorLastName"></span>
-                </div>
+    <h2 class="text-center">Class Registration</h2>
+    <p class="text-center subtitle">Fill out the form carefully for registration</p>
+    <form id="registrationForm" action="process_registration.php" method="post" enctype="multipart/form-data">
+        <!-- Name Section -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" name="first_name" id="firstName" placeholder="First Name">
+                <span class="error" id="errorFirstName"></span>
             </div>
-
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="example@example.com">
-                <span class="error" id="errorEmail"></span>
+            <div class="col-md-4">
+                <label for="middleName" class="form-label">Middle Name</label>
+                <input type="text" class="form-control" name="middle_name" id="middleName" placeholder="Middle Name">
+                <span class="error" id="errorMiddleName"></span>
             </div>
+            <div class="col-md-4">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" name="last_name" id="lastName" placeholder="Last Name">
+                <span class="error" id="errorLastName"></span>
+            </div>
+        </div>
 
-            <div class="mb-3">
-                <label for="tags" class="form-label">Tags</label>
-                <div class="tags-container" id="tagsContainer">
+        <!-- Email Section -->
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="example@example.com">
+            <span class="error" id="errorEmail"></span>
+        </div>
+
+        <!-- Tags Section -->
+        <div class="mb-3">
+            <label for="tags" class="form-label">Tags</label>
+            <div class="tags-container" id="tagsContainer">
                 <input type="hidden" name="inputTags" id="hiddenTags">
-                    <input type="text" name="tags" class="tag-input" id="tagInput" placeholder="Type and press space">
-                </div>
-                <span class="error" id="errorTags"></span>
+                <input type="text" name="tags" class="tag-input" id="tagInput" placeholder="Type and press space">
             </div>
+            <span class="error" id="errorTags"></span>
+        </div>
 
-            <div class="mb-3">
-                <label for="image" class="form-label">Upload Image</label>
-                <input type="file" name="image" class="form-control" id="image">
-                <span class="error" id="errorImage"></span>
+        <!-- Image Upload -->
+        <div class="mb-3">
+            <label for="image" class="form-label">Upload Image</label>
+            <input type="file" name="image" class="form-control" id="image">
+            <span class="error" id="errorImage"></span>
+        </div>
+
+        <!-- Role Section -->
+        <div class="mb-3">
+            <label for="role" class="form-label">Role</label>
+            <select class="form-select" name="role" id="role">
+                <option selected disabled>Please Select</option>
+                <option value="User">User</option>
+                <option value="Admin">Admin</option>
+            </select>
+            <span class="error" id="errorRole"></span>
+        </div>
+
+        <!-- Gender Section -->
+        <div class="mb-3">
+            <label class="form-label">Gender</label><br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                <label class="form-check-label" for="male">Male</label>
             </div>
-
-            <div class="mb-3">
-                <label for="role" class="form-label">Role</label>
-                <select class="form-select" name="role" id="role">
-                    <option selected disabled>Please Select</option>
-                    <option value="User">User</option>
-                    <option value="Admin">Admin</option>
-                </select>
-                <span class="error" id="errorRole"></span>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                <label class="form-check-label" for="female">Female</label>
             </div>
-
-            <div class="mb-3">
-                <label class="form-label">Gender</label><br>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="male" value="male">
-                    <label class="form-check-label" for="male">Male</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="female" value="female">
-                    <label class="form-check-label" for="female">Female</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="other" value="other">
-                    <label class="form-check-label" for="other">Other</label>
-                </div>
-                <span class="error" id="errorGender"></span>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="other" value="other">
+                <label class="form-check-label" for="other">Other</label>
             </div>
+            <span class="error" id="errorGender"></span>
+        </div>
 
-            <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" name="description" id="description" rows="3" placeholder="Description"></textarea>
-                <span class="error" id="errorDescription"></span>
+        <!-- Description Section -->
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" name="description" id="description" rows="3" placeholder="Description"></textarea>
+            <span class="error" id="errorDescription"></span>
+        </div>
+
+        <!-- Password Section -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                <span class="error" id="errorPassword"></span>
             </div>
-
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" id="password" placeholder="Password">
-                    <span class="error" id="errorPassword"></span>
-                </div>
-                <div class="col-md-6">
-                    <label for="confirmPassword" class="form-label">Confirm Password</label>
-                    <input type="password" name="confirm_password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
-                    <span class="error" id="errorConfirmPassword"></span>
-                </div>
+            <div class="col-md-6">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" name="confirm_password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+                <span class="error" id="errorConfirmPassword"></span>
             </div>
+        </div>
 
-            <div class="mb-3 form-check">
-                <input type="checkbox" name="agree" class="form-check-input" id="agreeTerms">
-                <label class="form-check-label" for="agreeTerms">I agree to the <a href="#">terms and conditions</a></label>
-                <span class="error" id="errorAgree"></span>
-            </div>
+        <!-- Terms and Conditions -->
+        <div class="mb-3 form-check">
+            <input type="checkbox" name="agree" class="form-check-input" id="agreeTerms">
+            <label class="form-check-label" for="agreeTerms">I agree to the <a href="#">terms and conditions</a></label>
+            <span class="error" id="errorAgree"></span>
+        </div>
 
-            <button type="submit" name="submit" class="submit btn btn-primary w-100">Submit</button>
-            <p style="color:#000;text-align:center">Already have an account <span style="color:green"><a style="text-decoration: none;" href="login.php">Sign In</a></span></p>
-        </form>
-    </div>
+        <!-- Submit Button -->
+        <button type="submit" name="submit" class="submit btn btn-primary w-100">Submit</button>
+        <p style="color:#000;text-align:center">
+            Already have an account? <span style="color:green"><a style="text-decoration: none;" href="login.php">Sign In</a></span>
+        </p>
+    </form>
+</div>
+
 
     <script>
         // Tags functionality
