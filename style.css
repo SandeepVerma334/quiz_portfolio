@@ -91,15 +91,16 @@ nav .logo img {
 /* slidbar styling starts */
    /* General Styles */
   
-button.cross {
-    left: 13rem;
+   button.cross {
+    left: 16rem;
     font-size: 18px;
     padding: 3px 8px 3px 8px;
     /* background-color: red; */
+    background: #e5e5e5;
 }
 .sidebar {
     width: 250px;
-    background-color: #5a415c;
+    background-color: #99b01c;
     color: #ecf0f1;
     height: 100%;
     position: fixed;
@@ -119,6 +120,7 @@ button.cross {
 .sidebar h3 {
     text-align: center;
     margin-bottom: 20px;
+    margin-left: -75px;
     /* background-color: magenta; */
 }
 
@@ -162,17 +164,44 @@ button.cross {
     /* background-color: orange; */
 }
 
+
 .toggle-button.cross::before {
     content: '✖';
     /* background-color: yellow; */
-    background-color: #5a415c;
+    background-color: #e5e5e5;
     color: black;
+  
 }
 
 .toggle-button.menu::before {
     content: '☰';
    
 }
+.logout-btn {
+    background-color: #99b01c; /* Primary button color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Button padding */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: all 0.3s ease; /* Smooth hover transition */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.logout-btn:hover {
+    background-color: #85a219; /* Slightly darker shade on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+.logout-btn:active {
+    background-color: #6f8515; /* Even darker shade when clicked */
+    transform: scale(0.95); /* Click effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow */
+}
+
 
 .content {
     margin-left: 20px;
@@ -197,7 +226,15 @@ button.cross {
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
+nav .slide_logo img {
 
+    max-width: 100%;
+    height: auto;
+    margin-top: 15px;
+    position: fixed;
+    margin-left: -5px;
+
+}
 /* Table Styling */
 .custom-table th, .custom-table td {
     vertical-align: middle;
@@ -228,5 +265,39 @@ button.cross {
 
 .custom-table-container .table-responsive {
     overflow-x: auto;
+}
+/* users table styling ends */
+/* users result page styling starts */
+
+.result_container {
+    width: 90%;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 1.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.result_heading  {
+    text-align: center;
+            color: #333;
+}
+/* users result page styling ends */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+table, th, td {
+    border: 1px solid #ddd;
+}
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+}
+th {
+    background-color: #f8f8f8;
+}
+tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 /* users table styling ends */

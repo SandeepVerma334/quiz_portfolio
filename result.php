@@ -64,53 +64,14 @@ $totalQuestions = count($questionsData);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Result</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 80%;
-            margin: 2rem auto;
-            background: #fff;
-            padding: 1.5rem;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1.5rem;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 0.75rem;
-            text-align: left;
-        }
-        th {
-            background-color: #f8f8f8;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        p {
-            font-size: 1.2rem;
-            margin: 0.5rem 0;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+     
 </head>
 <body>
     
-    <div class="container">
-        <h1>Quiz Result</h1>
-        <p>Total Questions: <?php echo $totalQuestions; ?></p>
+    <div class="result_container">
+        <h1 class="result_heading">Quiz Result</h1>
+        <p class="result_info">Total Questions: <?php echo $totalQuestions; ?></p>
         <p>Correct Answers: <?php echo $correctCount; ?></p>
         <p>Wrong Answers: <?php echo $wrongCount; ?></p>
         <p>Total Score: <strong><?php echo $score . " / " . $maxScore; ?></strong></p>
