@@ -92,11 +92,11 @@ nav .logo img {
    /* General Styles */
   
    button.cross {
-    left: 16rem;
+    left: 12rem;
     font-size: 18px;
     padding: 3px 8px 3px 8px;
     /* background-color: red; */
-    background: #e5e5e5;
+    background: transparent
 }
 .sidebar {
     width: 250px;
@@ -168,7 +168,7 @@ nav .logo img {
 .toggle-button.cross::before {
     content: '✖';
     /* background-color: yellow; */
-    background-color: #e5e5e5;
+    background-color:transparent;
     color: black;
   
 }

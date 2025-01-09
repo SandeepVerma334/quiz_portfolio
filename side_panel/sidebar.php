@@ -31,45 +31,11 @@ $role = $_SESSION['role']; // Use the role directly from the session
     height: 60px; /* Adjust this height to match your menu bar */
     /* display: flex;
     align-items: center; /* Vertically centers the logo */
-    /* justify-content: center; /* Centers the logo horizontally */\*
-    .logout-btn {
-    list-style: none; /* Remove default list styling */
-    margin: 10px 0; /* Add some spacing around the button */
-  
-}
+    /* justify-content: center; /* Centers the logo horizontally */
 
 
-.logout-btn button {
-    background-color: #99b01c; /* Primary button color */
-    color: white; /* Text color */
-    border: none; /* Remove border */
-    border-radius: 8px; /* Rounded corners */
-    padding: 12px 24px; /* Button padding */
-    font-size: 16px; /* Font size */
-    font-weight: bold; /* Bold text */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: all 0.3s ease; /* Smooth transition effects */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    width: 100%; /* Full-width button for better touch targets */
-    text-align: center; /* Center align the button text */
-}
 
-.logout-btn button:hover {
-    background-color: #85a219; /* Slightly darker shade on hover */
-    transform: scale(1.05); /* Slight zoom effect */
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
-}
 
-.logout-btn button:active {
-    background-color: #6f8515; /* Even darker shade when clicked */
-    transform: scale(0.95); /* Click effect */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow */
-}
-
-.logout-btn button:focus {
-    outline: 2px solid #6f8515; /* Accessible focus outline */
-    outline-offset: 2px; /* Add some spacing to the outline */
-}
 
 
         </style>
@@ -85,17 +51,19 @@ $role = $_SESSION['role']; // Use the role directly from the session
         <h3>Dashboard</h3>
         <ul>
             <?php if ($role === 'Admin'): ?>
-                <li class="logout-btn">
-    <button onclick="window.location.href='logout.php'">Logout</button>
-</li>
+               
 
                 <li><a href="#" id="profileLink">Profile</a></li>
                 <li><a href="#" id="usersLink">Users</a></li>
+                <li>
+                <button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button>
+</li>
             <?php else: ?>
-                <li><button onclick="window.location.href='logout.php'">Logout</button></li>
+               
                 <li><a href="#" id="profileLink">Profile</a></li>
                 <li><a href="#" id="takeQuizLink">Take Quiz</a></li>
                 <li><a href="#" id="quizResult">Results</a></li>
+                <li><button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button></li>
             <?php endif; ?>
         </ul>
     </div>
