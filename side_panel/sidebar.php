@@ -35,8 +35,9 @@ $role = $_SESSION['role']; // Use the role directly from the session
     .logout-btn {
     list-style: none; /* Remove default list styling */
     margin: 10px 0; /* Add some spacing around the button */
-    text-align: center; /* Center align the button within the list item */
+  
 }
+
 
 .logout-btn button {
     background-color: #99b01c; /* Primary button color */
