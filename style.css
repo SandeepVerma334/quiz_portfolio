@@ -9,7 +9,7 @@
     margin: 0;
     overflow-y: auto; */
 
-        background-image: url('background5.jpg');
+        background-image: url('background1.jpg');
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
@@ -32,8 +32,9 @@
    
         box-shadow: 0 0 5px 0 ;
         background: inherit;
-        backdrop-filter: blur(10px);
+        /* backdrop-filter: blur(10px); */
         /* <!--margin: 100px; according to your need--> */
+        backdrop-filter: blur(50px);
   
 }
 
