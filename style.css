@@ -318,3 +318,16 @@ tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 /* users table styling ends */
+/* users and admin slider icon styling */
+ol{
+    list-style-type: none;
+    position: relative;
+    top:300px;
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+color: black;
+}
+ol i{
+    font-size: 30px;
+}

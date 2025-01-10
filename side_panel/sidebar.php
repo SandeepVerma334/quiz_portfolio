@@ -24,6 +24,8 @@ $role = $_SESSION['role']; // Use the role directly from the session
     <title>Responsive User Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
     <style>
       /* /* .slide_logo {
     position: relative; /* Ensures the logo aligns properly inside this container */
@@ -58,6 +60,12 @@ $role = $_SESSION['role']; // Use the role directly from the session
                 <li>
                 <button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button>
 </li>
+<ol>
+    <li><i class="fab fa-github"></i> </li>
+    <li><i class="fab fa-linkedin" ></i> </li>
+    <li><i class="fab fa-facebook" ></i> </li>
+</ol>
+
             <?php else: ?>
                
                 <li><a href="#" id="profileLink">Profile</a></li>
@@ -66,6 +74,13 @@ $role = $_SESSION['role']; // Use the role directly from the session
                 <li><button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button></li>
             <?php endif; ?>
         </ul>
+        <ol>
+    <li><i class="fab fa-github"></i> </li>
+    <li><i class="fab fa-linkedin" ></i> </li>
+    <li><i class="fab fa-facebook" ></i> </li>
+</ol>
+
+
     </div>
 
     <!-- Toggle Button -->

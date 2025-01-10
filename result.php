@@ -65,16 +65,20 @@ $totalQuestions = count($questionsData);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Result</title>
     <link rel="stylesheet" href="style.css">
-     
+     <style>
+        .result_info{
+            margin-top : 20px;
+        }
+        </style>
 </head>
 <body>
     
     <div class="result_container">
         <h1 class="result_heading">Quiz Result</h1>
-        <p class="result_info">Total Questions: <?php echo $totalQuestions; ?></p>
+        <!-- <p class="result_info">Total Questions: <?php echo $totalQuestions; ?></p>
         <p>Correct Answers: <?php echo $correctCount; ?></p>
-        <p>Wrong Answers: <?php echo $wrongCount; ?></p>
-        <p>Total Score: <strong><?php echo $score . " / " . $maxScore; ?></strong></p>
+        <p>Wrong Answers: <?php echo $wrongCount; ?></p> -->
+        <!-- <p>Total Score: <strong><?php echo $score . " / " . $maxScore; ?></strong></p> -->
 
         <h2>Questions & Answers</h2>
         <table>
@@ -103,6 +107,7 @@ $totalQuestions = count($questionsData);
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <p class="result_info">Total Score: <strong><?php echo $score . " / " . $maxScore; ?></strong></p>
     </div>
 </body>
 </html>
