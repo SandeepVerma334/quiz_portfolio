@@ -59,7 +59,7 @@ if (isset($_POST["submit"])) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<div class="body">
 <nav>
         <div class="logo">
             <img src="logo3.png" alt="logo" width="100px">
@@ -97,5 +97,6 @@ if (isset($_POST["submit"])) {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</div>
 </body>
 </html>

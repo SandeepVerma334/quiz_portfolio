@@ -110,6 +110,7 @@ if ($conn->query($iquery) === TRUE) {
     </style>
 </head>
 <body>
+    <div class="body">
     <nav>
         <div class="logo">
             <img src="logo3.png" alt="logo" width="100px">
@@ -337,5 +338,6 @@ document.getElementById('registrationForm').addEventListener('submit', function 
             }
         });
     </script>
+    </div>
 </body>
 </html>
