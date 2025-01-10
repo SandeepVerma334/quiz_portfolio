@@ -9,7 +9,7 @@
     margin: 0;
     overflow-y: auto; */
 
-        background-image: url('background1.jpg');
+        background-image: url('download2.avif');
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
@@ -22,7 +22,7 @@
 
 
 .container {
-    background: #ffffff; /* White background for the form */
+   /* White background for the form */
     border-radius: 10px;
     /* box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); Lighter shadow */
     padding: 20px;
@@ -34,8 +34,8 @@
         background: inherit;
         /* backdrop-filter: blur(10px); */
         /* <!--margin: 100px; according to your need--> */
-        backdrop-filter: blur(50px);
-  
+        background-color: rgba(179, 156, 156, 0.5); 
+        backdrop-filter: saturate(180%) blur(10px);
 }
 
 .heading {
