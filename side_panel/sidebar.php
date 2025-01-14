@@ -56,6 +56,7 @@ $role = $_SESSION['role']; // Use the role directly from the session
                
 
                 <li><a href="#" id="profileLink">Profile</a></li>
+                
                 <li><a href="#" id="usersLink">Users</a></li>
                 <li>
                 <button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button>
@@ -69,9 +70,10 @@ $role = $_SESSION['role']; // Use the role directly from the session
             <?php else: ?>
                
                 <li><a href="#" id="profileLink">Profile</a></li>
+               
                 <li><a href="#" id="takeQuizLink">Take Quiz</a></li>
                 <li><a href="#" id="quizResult">Results</a></li>
-                <li><button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button></li>
+        
             <?php endif; ?>
         </ul>
         <ol>
