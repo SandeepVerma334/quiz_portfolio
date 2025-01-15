@@ -141,6 +141,7 @@ function shuffleOptions($correct_a, $incorrectOptions)
 }
 ?>
 <img id="loadingGif" src="animation.gif" alt="Loading...">
+
 <!-- animation for submit button starts script -->
 <script>
 document.getElementById('quizForm').addEventListener('submit', function (event) {

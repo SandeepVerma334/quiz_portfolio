@@ -73,6 +73,7 @@ $role = $_SESSION['role']; // Use the role directly from the session
                
                 <li><a href="#" id="takeQuizLink">Take Quiz</a></li>
                 <li><a href="#" id="quizResult">Results</a></li>
+                <button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button>
                 <ol>
     <li><a href="https://github.com" class="github"><i class="fab fa-github"></i></a></li>
     <li><a href="https://linkedin.com" class="linkedin"><i class="fab fa-linkedin"></i></a></li>

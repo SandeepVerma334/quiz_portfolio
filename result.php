@@ -65,45 +65,48 @@ $totalQuestions = count($questionsData);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Result</title>
     <link rel="stylesheet" href="style.css">
-    
+   
 </head>
-<body>
-    
+<body class="result_body">
+
     <div class="result_container">
         <h1 class="result_heading">Quiz Result</h1>
-        <!-- <p class="result_info">Total Questions: <?php echo $totalQuestions; ?></p>
-        <p>Correct Answers: <?php echo $correctCount; ?></p>
-        <p>Wrong Answers: <?php echo $wrongCount; ?></p> -->
-        <!-- <p>Total Score: <strong><?php echo $score . " / " . $maxScore; ?></strong></p> -->
-
-        <h2>Questions & Answers</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Result ID</th>
-                    <th>Question</th>
-                    <th>Your Answer</th>
-                    <th>Correct Answer</th>
-                    <th>Status</th>
-                    <th>Submitted At</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($questionsData as $data): ?>
+        
+        <?php if ($totalQuestions > 0): ?>
+            <h2>Questions & Answers</h2>
+            <table>
+                <thead>
                     <tr>
-                        <td><?php echo htmlspecialchars($data['result_id']); ?></td>
-                        <td><?php echo htmlspecialchars($data['question']); ?></td>
-                        <td><?php echo htmlspecialchars($data['user_ans']); ?></td>
-                        <td><?php echo htmlspecialchars($data['correct_ans']); ?></td>
-                        <td>
-                            <?php echo $data['is_correct'] == 1 ? '<span style="color: green;">Correct</span>' : '<span style="color: red;">Wrong</span>'; ?>
-                        </td>
-                        <td><?php echo htmlspecialchars($data['createdAt']); ?></td>
+                        <th>Result ID</th>
+                        <th>Question</th>
+                        <th>Your Answer</th>
+                        <th>Correct Answer</th>
+                        <th>Status</th>
+                        <th>Submitted At</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <p class="result_info">Total Score: <strong><?php echo $score . " / " . $maxScore; ?></strong></p>
+                </thead>
+                <tbody>
+                    <?php foreach ($questionsData as $data): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($data['result_id']); ?></td>
+                            <td><?php echo htmlspecialchars($data['question']); ?></td>
+                            <td><?php echo htmlspecialchars($data['user_ans']); ?></td>
+                            <td><?php echo htmlspecialchars($data['correct_ans']); ?></td>
+                            <td>
+                                <?php echo $data['is_correct'] == 1 
+                                    ? '<span style="color: green;">Correct</span>' 
+                                    : '<span style="color: red;">Wrong</span>'; ?>
+                            </td>
+                            <td><?php echo htmlspecialchars($data['createdAt']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <p class="result_info">Total Score: <strong><?php echo $score . " / " . $maxScore; ?></strong></p>
+        <?php else: ?>
+            <p class="result_info">No quiz attempt found. Please take the quiz to see your results.</p>
+        <?php endif; ?>
     </div>
+
 </body>
 </html>

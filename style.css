@@ -14,10 +14,10 @@
         background-size: cover;
         background-attachment: fixed;
         min-height: 100vh;
+        background-position: center center;
    }
-   
 
-   .container {
+.container {
     border-radius: 10px;
     padding: 20px;
     width: 100%;
@@ -26,8 +26,8 @@
     box-shadow: 0 0 5px 0;
     /* background: inherit; */
     /* backdrop-filter: blur(10px); */
-    background-color: rgb(0 0 0 / 50%);
-    backdrop-filter: saturate(180%) blur(36px);
+    background-color: rgb(0 0 0 / 29%);
+    backdrop-filter: saturate(180%) blur(10px);
     color: #c79a9a;
 }
 
