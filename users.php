@@ -26,8 +26,11 @@ $query = mysqli_query($conn, $selectQuery);
 if(mysqli_num_rows($query) > 0) {
     ?>
 <div class="custom-table-container">
+    <div class="user-heading">
+        <h2>All user data</h2>
+    </div>
     <div class="table-responsive">
-        <table class="table table-hover custom-table text-center">
+        <table class=" text-center">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -81,7 +84,6 @@ if(mysqli_num_rows($query) > 0) {
 
 
 ?>
-<button onclick="window.location.href='logout.php'">Logout</button>
 </div>
 </body>
 </html>

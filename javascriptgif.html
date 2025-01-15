@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Animation on Submit</title>
+    <style>
+        #loadingGif {
+            display: none; /* Hide the GIF by default */
+            margin-top: 400px;
+            margin-left: 500px;
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <form id="myForm" onsubmit="showGif(event)">
+        <label for="inputField">Enter Something:</label>
+        <input type="text" id="inputField" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- GIF Image -->
+    <img id="loadingGif" src="animation.gif" alt="Loading...">
+
+    <script>
+        function showGif(event) {
+            // Prevent the default form submission
+            event.preventDefault();
+
+            // Display the GIF
+            const loadingGif = document.getElementById('loadingGif');
+            loadingGif.style.display = 'block';
+
+            // Simulate a delay (e.g., for form processing or AJAX call)
+            setTimeout(() => {
+                // alert("Form submitted successful?
+                loadingGif.style.display = 'none'; // Hide the GIF after the operation
+            }, 3000); // 3-second delay
+        }
+    </script>
+</body>
+</html>

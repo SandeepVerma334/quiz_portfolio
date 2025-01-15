@@ -222,12 +222,11 @@ if ($conn->query($iquery) === TRUE) {
 
         <!-- Submit Button -->
         <button type="submit" name="submit" class="submit btn btn-primary w-100">Submit</button>
-        <p style="color:#000;text-align:center">
+        <p style="color:#ffffff;text-align:center">
             Already have an account? <span style="color:green"><a style="text-decoration: none;" href="login.php">Sign In</a></span>
         </p>
     </form>
 </div>
-
 
     <script>
         // Tags functionality

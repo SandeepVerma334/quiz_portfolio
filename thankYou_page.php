@@ -152,12 +152,12 @@ $totalQuestions = count($questionsData);
             <p>You will be redirected to the dashboard in 3 seconds...</p>
         </div>
     </div>
-
+<!-- 
     <script type="text/javascript">
         // Redirect to the dashboard after 3 seconds
         setTimeout(function() {
             window.location.href = 'dashboard.php'; // Change this to the actual dashboard page URL
         }, 3000); 
-    </script>
+    </script> -->
 </body>
 </html>

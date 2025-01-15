@@ -39,7 +39,6 @@ $role = $_SESSION['role']; // Use the role directly from the session
 
 
 
-
         </style>
 </head>
 <body>
@@ -61,11 +60,12 @@ $role = $_SESSION['role']; // Use the role directly from the session
                 <li>
                 <button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button>
 </li>
-<ol>
-    <li><i class="fab fa-github"></i> </li>
-    <li><i class="fab fa-linkedin" ></i> </li>
-    <li><i class="fab fa-facebook" ></i> </li>
-</ol>
+<!-- <ol>
+    <li><a href="https://github.com" class="github"><i class="fab fa-github"></i></a></li>
+    <li><a href="https://linkedin.com" class="linkedin"><i class="fab fa-linkedin"></i></a></li>
+    <li><a href="https://facebook.com" class="facebook"><i class="fab fa-facebook"></i></a></li>
+</ol> -->
+            
 
             <?php else: ?>
                
@@ -73,14 +73,15 @@ $role = $_SESSION['role']; // Use the role directly from the session
                
                 <li><a href="#" id="takeQuizLink">Take Quiz</a></li>
                 <li><a href="#" id="quizResult">Results</a></li>
+                <ol>
+    <li><a href="https://github.com" class="github"><i class="fab fa-github"></i></a></li>
+    <li><a href="https://linkedin.com" class="linkedin"><i class="fab fa-linkedin"></i></a></li>
+    <li><a href="https://facebook.com" class="facebook"><i class="fab fa-facebook"></i></a></li>
+</ol>
         
             <?php endif; ?>
         </ul>
-        <ol>
-    <li><i class="fab fa-github"></i> </li>
-    <li><i class="fab fa-linkedin" ></i> </li>
-    <li><i class="fab fa-facebook" ></i> </li>
-</ol>
+ 
 
 
     </div>
@@ -96,6 +97,20 @@ $role = $_SESSION['role']; // Use the role directly from the session
         <div id="takeQuizContent"></div>
     </div>
 
+
+
+    <!-- <footer class="bg-body-tertiary text-center">
+   -->
+
+  <!-- Copyright -->
+  <!-- <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2020 Copyright:
+    <a class="text-body" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+  </div> -->
+  <!-- Copyright -->
+<!-- </footer>         -->
+
+            
     <script>
        const sidebar = document.getElementById('sidebar');
 const toggleButton = document.getElementById('toggleButton');

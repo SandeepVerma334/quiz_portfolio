@@ -116,6 +116,152 @@ $profileHeading = ($row['role'] === 'Admin') ? 'Admin Profile' : 'User Profile';
     </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <div
+        <div class="profile_img">
+                        <img src="uploads/<?php echo htmlspecialchars($row['file']); ?>" alt="User Image" width="100" height="100" style="border-radius: 50%; object-fit: cover;">
+    </div>
+    
+        <table class="table table-bordered profile-table">
+            <thead class="table-dark">
+                <tr>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Gender</th>
+                    <th>Description</th>
+                    <!-- <th>Profile Image</th> -->
+                    </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><?php echo htmlspecialchars($row["first_name"]); ?></td>
+                    <td><?php echo htmlspecialchars($row["middle_name"]); ?></td>
+                    <td><?php echo htmlspecialchars($row["last_name"]); ?></td>
+                    <td><?php echo htmlspecialchars($row["email"]); ?></td>
+                    <td><?php echo htmlspecialchars($row["role"]); ?></td>
+                    <td><?php echo htmlspecialchars($row["gender"]); ?></td>
+                    <td><?php echo htmlspecialchars($row["description"]); ?></td>
+                    <!-- <td>
+                        <img src="uploads/<?php echo htmlspecialchars($row['file']); ?>" alt="User Image" width="100" height="100" style="border-radius: 50%; object-fit: cover;">
+                    </td> -->
+                </tr>
+            </tbody>
+        </table> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- Font Awesome CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     <!-- Bootstrap JS -->

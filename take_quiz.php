@@ -1,3 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>take quiz page</title>
+<link rel="stylesheet" href="style.css">
+<style>
+       /* Initially hide the loading GIF */
+       #loadingGif {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+
+        /* Show the loading GIF when the body has the loading class */
+        body.loading #loadingGif {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    
+<!-- 
+<img id="loadingGif" src="animation.gif" alt="Loading..."> -->
+
+
 <?php
 include("db.php");
 session_start();
@@ -43,9 +73,9 @@ if (!$result) {
 
 $questions = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-echo '<form id="quizForm" method="POST" action="insertResult.php">';
+echo '<form id="quizForm" method="POST" action="insertResult.php" class="quizform">';
 
-foreach ($questions as $index => $q) {    
+foreach ($questions as $index => $q) {                                                    
     echo "<p>Q" . ($index + 1) . ". " . $q['question'] . "</p>";    
     $correct_a = $q['answer'];    
     $incorrectOptions = generateIncorrectOptions($correct_a);
@@ -67,7 +97,7 @@ foreach ($questions as $index => $q) {
     echo '<hr>';
 }
 
-echo '<button type="submit" name="submit" id="submitQuizBtn" class="btn btn-primary">Submit Quiz</button>';
+echo '<button type="submit" name="submit" id="submitQuizBtn" class="btn btn-primary" )>Submit Quiz</button>';
 echo '</form>';
 
 /**
@@ -110,5 +140,31 @@ function shuffleOptions($correct_a, $incorrectOptions)
     return $options;
 }
 ?>
+<img id="loadingGif" src="animation.gif" alt="Loading...">
+<!-- animation for submit button starts script -->
+<script>
+document.getElementById('quizForm').addEventListener('submit', function (event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+
+    // Show the loading GIF
+    document.body.classList.add('loading');
+
+    // Simulate a delay before redirecting
+    setTimeout(() => {
+        // Programmatically submit the form to insertResult.php
+        this.submit();
+    }, 3000); // 3-second delay
+});
+
+</script>
+
+<!-- animation for submit button ends script -->
+
+
+
+
+
+
 </body>
 </html>

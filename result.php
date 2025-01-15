@@ -65,11 +65,7 @@ $totalQuestions = count($questionsData);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Result</title>
     <link rel="stylesheet" href="style.css">
-     <style>
-        .result_info{
-            margin-top : 20px;
-        }
-        </style>
+    
 </head>
 <body>
     

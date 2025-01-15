@@ -92,7 +92,7 @@ if (isset($_POST["submit"])) {
         </form>
 
         <div class="signup-link text-center mt-3">
-            <p>Don't have an account? <a href="register.php">Sign Up</a></p>
+            <p style="color:#ffffff"  >Don't have an account? <a href="register.php">Sign Up</a></p>
         </div>
     </div>
 
