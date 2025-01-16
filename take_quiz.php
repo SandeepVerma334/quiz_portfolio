@@ -20,6 +20,19 @@
         body.loading #loadingGif {
             display: block;
         }
+        #quizTimer {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: #f44336;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    z-index: 1000;
+}
+
     </style>
 </head>
 <body>
@@ -27,6 +40,7 @@
 <!-- 
 <img id="loadingGif" src="animation.gif" alt="Loading..."> -->
 
+<div id="quizTimer">Time Left: 10:00</div>
 
 <?php
 include("db.php");
@@ -144,21 +158,45 @@ function shuffleOptions($correct_a, $incorrectOptions)
 
 <!-- animation for submit button starts script -->
 <script>
-document.getElementById('quizForm').addEventListener('submit', function (event) {
-    // Prevent the default form submission behavior
-    event.preventDefault();
+    document.addEventListener('DOMContentLoaded', function () {
+        let totalTime = 10 * 60; // Total time in seconds (10 minutes)
+        const timerElement = document.getElementById('quizTimer');
 
-    // Show the loading GIF
-    document.body.classList.add('loading');
+        // Function to update the timer display
+        function updateTimerDisplay() {
+            const minutes = Math.floor(totalTime / 60);
+            const seconds = totalTime % 60;
+            timerElement.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
 
-    // Simulate a delay before redirecting
-    setTimeout(() => {
-        // Programmatically submit the form to insertResult.php
-        this.submit();
-    }, 3000); // 3-second delay
-});
+        // Initialize the timer display
+        updateTimerDisplay();
 
+        // Start the countdown
+        const timerInterval = setInterval(() => {
+            totalTime--;
+
+            if (totalTime <= 0) {
+                clearInterval(timerInterval);
+                alert("Time's up! Submitting the quiz.");
+                document.getElementById('quizForm').submit(); // Auto-submit the form when time runs out
+            } else {
+                updateTimerDisplay();
+            }
+        }, 1000);
+
+        // Submit button logic
+        document.getElementById('quizForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            clearInterval(timerInterval); // Stop the timer when the form is submitted
+            document.body.classList.add('loading');
+            setTimeout(() => {
+                this.submit();
+            }, 3000); // Delay for loading animation
+        });
+    });
 </script>
+
 
 <!-- animation for submit button ends script -->
 
