@@ -28,7 +28,7 @@
     /* backdrop-filter: blur(10px); */
     background-color: rgb(0 0 0 / 29%);
     backdrop-filter: saturate(180%) blur(10px);
-    color: #c79a9a;
+    
 }
 
 .heading {
@@ -336,7 +336,7 @@ tr:nth-child(even) {
 ol{
     list-style-type: none;
     position: relative;
-    top:450px;
+    top:250px;
 display: flex;
 left: -34px;
 align-items: center;
@@ -376,14 +376,11 @@ footer {
 /* admin user all data end styling */
 /* profile page styling starts */
 
-.profile-container {
-    margin: 20px auto;
-    max-width: 1000px;
-    /* border: 1px solid #ddd; */
-    padding: 20px;
-    border-radius: 8px;
-    background-color: hwb(0 100% 0%);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.profile-container { width: 90%;
+    margin: 5rem auto;
+    background: #fff;
+    padding: 1.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .profile-table th, .profile-table td {
     text-align: center;

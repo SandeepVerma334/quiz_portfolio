@@ -15,6 +15,10 @@
             transform: translate(-50%, -50%);
             z-index: 9999;
         }
+        #quizForm{
+            margin-top:100px;
+            margin-left: 55px;
+        }
 
         /* Show the loading GIF when the body has the loading class */
         body.loading #loadingGif {
@@ -23,7 +27,7 @@
         #quizTimer {
     position: fixed;
     top: 10px;
-    right: 10px;
+    right: 740px;
     background: #f44336;
     color: #fff;
     padding: 10px 20px;

@@ -32,17 +32,19 @@ $profileHeading = ($row['role'] === 'Admin') ? 'Admin Profile' : 'User Profile';
     <title>Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
    
  
 </head>
 <body>
-    <div class=" card-deck profile-container">
+    <div class="  profile-container">
         <h2 class="profile-heading text-center "><?php echo $profileHeading; ?></h2>
 
 
 
 
-        <div class="card text-center mt-4">
+        <div class=" text-center mt-4">
     <div >
         <!-- Profile Picture -->
         <img src="uploads/<?php echo htmlspecialchars($row['file']); ?>" alt="User Image"
@@ -55,9 +57,9 @@ $profileHeading = ($row['role'] === 'Admin') ? 'Admin Profile' : 'User Profile';
         <hr>
 
         <!-- Contact Information -->
-        <p><strong>Email:</strong><?php echo htmlspecialchars($row["email"]); ?></p>
+        <p><i class="fa fa-envelope"></i> : <?php echo htmlspecialchars($row["email"]); ?></p>
         <!-- <p><strong>Phone:</strong> +123 456 7890</p> -->
-        <p><strong>Gender:</strong><?php echo htmlspecialchars($row["gender"]); ?></p>
+        <p style="font-weight: 20px;">Gender : <?php echo htmlspecialchars($row["gender"]); ?></p>
 
         <!-- Additional Information -->
         <h5 class="mt-3">About Me</h5>
