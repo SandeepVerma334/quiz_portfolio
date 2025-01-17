@@ -45,7 +45,7 @@
 <img id="loadingGif" src="animation.gif" alt="Loading..."> -->
 
 <div id="quizTimer">Time Left: 10:00</div>
-
+<div id="quizContent">
 <?php
 include("db.php");
 session_start();
@@ -161,45 +161,53 @@ function shuffleOptions($correct_a, $incorrectOptions)
 <img id="loadingGif" src="animation.gif" alt="Loading...">
 
 <!-- animation for submit button starts script -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        let totalTime = 10 * 60; // Total time in seconds (10 minutes)
-        const timerElement = document.getElementById('quizTimer');
 
-        // Function to update the timer display
-        function updateTimerDisplay() {
-            const minutes = Math.floor(totalTime / 60);
-            const seconds = totalTime % 60;
-            timerElement.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        }
+   <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const timerElement = document.getElementById('quizTimer');
+            const quizContent = document.getElementById('quizContent');
+            
+            // Fetch the quiz content dynamically
+            fetch('take_quiz.php')
+                .then(response => response.text())
+                .then(data => {
+                    if (data.includes("already completed")) {
+                        quizContent.innerHTML = data;
+                    } else {
+                        quizContent.innerHTML = data;
+                        startTimer();
+                    }
+                })
+                .catch(error => {
+                    quizContent.innerHTML = "<p>Error loading quiz content.</p>";
+                    console.error('Error fetching quiz:', error);
+                });
 
-        // Initialize the timer display
-        updateTimerDisplay();
+            function startTimer() {
+                let totalTime = 10 * 60; // 10 minutes in seconds
+                timerElement.style.display = 'block'; // Show timer
 
-        // Start the countdown
-        const timerInterval = setInterval(() => {
-            totalTime--;
+                function updateTimerDisplay() {
+                    const minutes = Math.floor(totalTime / 60);
+                    const seconds = totalTime % 60;
+                    timerElement.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                }
 
-            if (totalTime <= 0) {
-                clearInterval(timerInterval);
-                alert("Time's up! Submitting the quiz.");
-                document.getElementById('quizForm').submit(); // Auto-submit the form when time runs out
-            } else {
+                const timerInterval = setInterval(() => {
+                    totalTime--;
+                    updateTimerDisplay();
+
+                    if (totalTime <= 0) {
+                        clearInterval(timerInterval);
+                        alert("Time's up! Submitting the quiz.");
+                        document.getElementById('quizForm').submit(); // Auto-submit the form
+                    }
+                }, 1000);
+
                 updateTimerDisplay();
             }
-        }, 1000);
-
-        // Submit button logic
-        document.getElementById('quizForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-            clearInterval(timerInterval); // Stop the timer when the form is submitted
-            document.body.classList.add('loading');
-            setTimeout(() => {
-                this.submit();
-            }, 3000); // Delay for loading animation
         });
-    });
-</script>
+    </script>
 
 
 <!-- animation for submit button ends script -->

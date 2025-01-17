@@ -160,7 +160,7 @@ if ($conn->query($iquery) === TRUE) {
         <div class="mb-3">
             <label for="image" class="form-label">Upload Image</label>
             <input type="file" name="image" class="form-control" id="image">
-            <span class="error" id="errorImage"></span>
+            <span class="error" id="errormessage"></span>
         </div>
 
         <!-- Role Section -->
@@ -301,11 +301,20 @@ document.getElementById('registrationForm').addEventListener('submit', function 
             }
 
             // Validate Email
-            const email = document.getElementById('email');
-            if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
-                isValid = false;
-                document.getElementById('errorEmail').textContent = 'Valid email is required.';
-            }
+// Validate Email
+const email = document.getElementById('email');
+const errorEmail = document.getElementById('errorEmail');
+
+// Clear previous error
+errorEmail.textContent = '';
+
+if (!email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+    isValid = false;
+    errorEmail.textContent = ' Enter a vaild Email Address.';
+} 
+
+
+
 
             // Validate Tags
             if (tags.length === 0) {
@@ -315,14 +324,62 @@ document.getElementById('registrationForm').addEventListener('submit', function 
 
             // Validate Passwords
             const password = document.getElementById('password');
-            const confirmPassword = document.getElementById('confirmPassword');
-            if (!password.value.trim()) {
-                isValid = false;
-                document.getElementById('errorPassword').textContent = 'Password is required.';
-            } else if (password.value !== confirmPassword.value) {
-                isValid = false;
-                document.getElementById('errorConfirmPassword').textContent = 'Passwords do not match.';
-            }
+const confirmPassword = document.getElementById('confirmPassword');
+const errorPassword = document.getElementById('errorPassword');
+const errorConfirmPassword = document.getElementById('errorConfirmPassword');
+
+// Clear previous errors
+errorPassword.textContent = '';
+errorConfirmPassword.textContent = '';
+
+if (!password.value.trim()) {
+    isValid = false;
+    errorPassword.textContent = 'Password is required.';
+} else {
+    const pNumber = /\d/;       // Check for a number
+    const pUpperCase = /[A-Z]/; // Check for an uppercase letter
+    const pLowerCase = /[a-z]/; // Check for a lowercase letter
+    const pSpecialChar = /[@$!%*?&]/; // Check for a special character
+    const pValidLength = password.value.length >= 8;  // Check for minimum length
+
+    let passwordValid = true;
+    let messages = [];
+
+    if (!pValidLength) {
+        passwordValid = false;
+        messages.push('Password must be at least 8 characters long.');
+    }
+    if (!pNumber.test(password.value)) {
+        passwordValid = false;
+        messages.push('Password must contain at least one number.');
+    }
+    if (!pUpperCase.test(password.value)) {
+        passwordValid = false;
+        messages.push('Password must contain at least one uppercase letter.');
+    }
+    if (!pLowerCase.test(password.value)) {
+        passwordValid = false;
+        messages.push('Password must contain at least one lowercase letter.');
+    }
+    if (!pSpecialChar.test(password.value)) {
+        passwordValid = false;
+        messages.push('Password must contain at least one special character.');
+    }
+
+    if (!passwordValid) {
+        isValid = false;
+        errorPassword.innerHTML = messages.join('<br>'); // Show all error messages
+    }
+
+    // Check if passwords match
+    if (password.value !== confirmPassword.value) {
+        isValid = false;
+        errorConfirmPassword.textContent = 'Passwords do not match.';
+    }
+   
+}
+
+
 
             // Validate Agree Terms
             const agreeTerms = document.getElementById('agreeTerms');
@@ -336,6 +393,58 @@ document.getElementById('registrationForm').addEventListener('submit', function 
                 e.preventDefault();
             }
         });
+
+        // file upload vaildation
+      
+document.getElementById('registrationForm').addEventListener('submit', function (e) {
+    const fileInput = document.getElementById('image');
+    const errorMessage = document.getElementById('errormessage');
+
+    // Clear previous errors
+    errorMessage.textContent = '';
+
+    if (fileInput.files.length === 0) {
+        e.preventDefault();
+        errorMessage.textContent = 'Please upload a file.';
+        return;
+    }
+
+    const file = fileInput.files[0];
+
+    // Validate file size (minimum 5MB)
+    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+    if (file.size >= maxSize) {
+        e.preventDefault();
+        errorMessage.textContent = 'File size must be less than 5MB.';
+        return;
+    }
+    // Validate file type
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (!allowedTypes.includes(file.type)) {
+        e.preventDefault();
+        errorMessage.textContent = 'Only JPEG, PNG, and GIF files are allowed.';
+        return;
+    }
+
+    errorMessage.textContent = ''; // Clear error if validation passes
+});
+// role vaildation
+   // Get the form and select elements
+   const registrationForm = document.getElementById('registrationForm');
+    const roleSelect = document.getElementById('role');
+    const errorRole = document.getElementById('errorRole');
+
+    registrationForm.addEventListener('submit', function (e) {
+        // Clear previous error message
+        errorRole.textContent = '';
+
+        // Validate the role selection
+        if (roleSelect.value === "Please Select") {
+            e.preventDefault(); // Prevent form submission
+            errorRole.textContent = 'Please select a valid role.';
+        }
+    });
+
     </script>
     </div>
 </body>

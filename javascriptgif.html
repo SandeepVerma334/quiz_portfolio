@@ -3,41 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show Animation on Submit</title>
+    <title>Countdown Timer</title>
     <style>
-        #loadingGif {
-            display: none; /* Hide the GIF by default */
-            margin-top: 400px;
-            margin-left: 500px;
-            width: 400px;
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #timerDisplay {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            margin: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <form id="myForm" onsubmit="showGif(event)">
-        <label for="inputField">Enter Something:</label>
-        <input type="text" id="inputField" required>
-        <button type="submit">Submit</button>
-    </form>
-
-    <!-- GIF Image -->
-    <img id="loadingGif" src="animation.gif" alt="Loading...">
+    <h1>Countdown Timer</h1>
+    <div id="timerDisplay">10:00</div>
+    <button id="startBtn">Start Countdown</button>
 
     <script>
-        function showGif(event) {
-            // Prevent the default form submission
-            event.preventDefault();
+        let countdownInterval; // Variable to store the interval ID
+        let remainingTime = 600; // Total countdown time in seconds (10 minutes)
 
-            // Display the GIF
-            const loadingGif = document.getElementById('loadingGif');
-            loadingGif.style.display = 'block';
+        // Get references to DOM elements
+        const timerDisplay = document.getElementById('timerDisplay');
+        const startBtn = document.getElementById('startBtn');
 
-            // Simulate a delay (e.g., for form processing or AJAX call)
-            setTimeout(() => {
-                // alert("Form submitted successful?
-                loadingGif.style.display = 'none'; // Hide the GIF after the operation
-            }, 3000); // 3-second delay
+        // Format time as MM:SS
+        function formatTime(seconds) {
+            const minutes = String(Math.floor(seconds / 60)).padStart(2, '0');
+            const secs = String(seconds % 60).padStart(2, '0');
+            return `${minutes}:${secs}`;
         }
+
+        // Start the countdown
+        function startCountdown() {
+            startBtn.disabled = true;
+
+            countdownInterval = setInterval(() => {
+                if (remainingTime > 0) {
+                    remainingTime--;
+                    timerDisplay.textContent = formatTime(remainingTime);
+                } else {
+                    clearInterval(countdownInterval);
+                    timerDisplay.textContent = "Time's Up!";
+                    startBtn.disabled = false;
+                }
+            }, 1000); // Update every second
+        }
+
+        // Attach event listener
+        startBtn.addEventListener('click', startCountdown);
     </script>
 </body>
 </html>
