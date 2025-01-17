@@ -3,63 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown Timer</title>
+    <title>Password Validation Form</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
+            margin: 20px;
         }
-        #timerDisplay {
-            font-size: 2em;
-            margin: 20px 0;
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        .success {
+            color: green;
+            font-size: 0.9em;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
         button {
-            padding: 10px 20px;
-            font-size: 1em;
-            margin: 5px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <h1>Countdown Timer</h1>
-    <div id="timerDisplay">10:00</div>
-    <button id="startBtn">Start Countdown</button>
+    <h1>Create an Account</h1>
+    <form id="registrationForm">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+        <div id="errorPassword" class="error"></div>
+        
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+        <div id="errorConfirmPassword" class="error"></div>
+
+
+
+        
+        <button type="submit">Register</button>
+    </form>
 
     <script>
-        let countdownInterval; // Variable to store the interval ID
-        let remainingTime = 600; // Total countdown time in seconds (10 minutes)
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const errorPassword = document.getElementById('errorPassword');
+        const errorConfirmPassword = document.getElementById('errorConfirmPassword');
 
-        // Get references to DOM elements
-        const timerDisplay = document.getElementById('timerDisplay');
-        const startBtn = document.getElementById('startBtn');
+        function validatePassword() {
+            errorPassword.innerHTML = '';
+            const pNumber = /\d/;       // Check for a number
+            const pUpperCase = /[A-Z]/; // Check for an uppercase letter
+            const pLowerCase = /[a-z]/; // Check for a lowercase letter
+            const pSpecialChar = /[@$!%*?&]/; // Check for a special character
+            const pValidLength = password.value.length >= 8;  // Check for minimum length
 
-        // Format time as MM:SS
-        function formatTime(seconds) {
-            const minutes = String(Math.floor(seconds / 60)).padStart(2, '0');
-            const secs = String(seconds % 60).padStart(2, '0');
-            return `${minutes}:${secs}`;
+            let passwordValid = true;
+            let messages = [];
+
+            if (!pValidLength) {
+                passwordValid = false;
+                messages.push('<span style="color:red;">Password must be at least 8 characters long.</span>');
+            } else {
+                messages.push('<span style="color:green;">✓ Password contains at least 8 characters.</span>');
+            }
+
+            if (!pNumber.test(password.value)) {
+                passwordValid = false;
+                messages.push('<span style="color:red;">Password must contain at least one number.</span>');
+            } else {
+                messages.push('<span style="color:green;">✓ Password contains at least one number.</span>');
+            }
+
+            if (!pUpperCase.test(password.value)) {
+                passwordValid = false;
+                messages.push('<span style="color:red;">Password must contain at least one uppercase letter.</span>');
+            } else {
+                messages.push('<span style="color:green;">✓ Password contains at least one uppercase letter.</span>');
+            }
+
+            if (!pLowerCase.test(password.value)) {
+                passwordValid = false;
+                messages.push('<span style="color:red;">Password must contain at least one lowercase letter.</span>');
+            } else {
+                messages.push('<span style="color:green;">✓ Password contains at least one lowercase letter.</span>');
+            }
+
+            if (!pSpecialChar.test(password.value)) {
+                passwordValid = false;
+                messages.push('<span style="color:red;">Password must contain at least one special character.</span>');
+            } else {
+                messages.push('<span style="color:green;">✓ Password contains at least one special character.</span>');
+            }
+
+            errorPassword.innerHTML = messages.join('<br>');
         }
 
-        // Start the countdown
-        function startCountdown() {
-            startBtn.disabled = true;
-
-            countdownInterval = setInterval(() => {
-                if (remainingTime > 0) {
-                    remainingTime--;
-                    timerDisplay.textContent = formatTime(remainingTime);
-                } else {
-                    clearInterval(countdownInterval);
-                    timerDisplay.textContent = "Time's Up!";
-                    startBtn.disabled = false;
-                }
-            }, 1000); // Update every second
+        function validateConfirmPassword() {
+            errorConfirmPassword.innerHTML = '';
+            if (confirmPassword.value.trim() === '') {
+                errorConfirmPassword.textContent = 'Please confirm your password.';
+            } else if (password.value !== confirmPassword.value) {
+                errorConfirmPassword.textContent = 'Passwords do not match.';
+            } else {
+                errorConfirmPassword.innerHTML = '<span style="color:green;">✓ Passwords match.</span>';
+            }
         }
 
-        // Attach event listener
-        startBtn.addEventListener('click', startCountdown);
+        // Add event listeners for real-time validation
+        password.addEventListener('input', validatePassword);
+        confirmPassword.addEventListener('input', validateConfirmPassword);
+
+        // Final validation on form submission
+        document.getElementById('registrationForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form submission
+            validatePassword();
+            validateConfirmPassword();
+            if (!errorPassword.textContent && !errorConfirmPassword.textContent) {
+                alert('Form submitted successfully!');
+                this.submit(); // Submit the form if all validations pass
+            }
+        });
+
+
+        
     </script>
 </body>
 </html>

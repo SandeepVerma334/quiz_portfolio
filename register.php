@@ -300,7 +300,6 @@ document.getElementById('registrationForm').addEventListener('submit', function 
                 document.getElementById('errorFirstName').textContent = 'First Name is required.';
             }
 
-            // Validate Email
 // Validate Email
 const email = document.getElementById('email');
 const errorEmail = document.getElementById('errorEmail');
@@ -308,10 +307,26 @@ const errorEmail = document.getElementById('errorEmail');
 // Clear previous error
 errorEmail.textContent = '';
 
-if (!email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+// Convert email value to lowercase
+const emailValue = email.value.trim().toLowerCase();
+email.value = emailValue; // Update the input field value to lowercase
+
+// Validate email
+if (!emailValue) {
     isValid = false;
-    errorEmail.textContent = ' Enter a vaild Email Address.';
-} 
+    errorEmail.textContent = 'Email is required.';
+} else if (!emailValue.includes('@')) {
+    isValid = false;
+    errorEmail.textContent = 'Email must contain "@" symbol.';
+} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+    isValid = false;
+    errorEmail.textContent = 'Please enter a valid email address.';
+} else if (emailValue.length > 50) {
+    isValid = false;
+    errorEmail.textContent = 'Email is too long.';
+} else {
+    errorEmail.textContent = ''; // No error
+}
 
 
 
@@ -322,66 +337,7 @@ if (!email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()
                 errorTags.textContent = 'At least one tag is required.';
             }
 
-            // Validate Passwords
-            const password = document.getElementById('password');
-const confirmPassword = document.getElementById('confirmPassword');
-const errorPassword = document.getElementById('errorPassword');
-const errorConfirmPassword = document.getElementById('errorConfirmPassword');
-
-// Clear previous errors
-errorPassword.textContent = '';
-errorConfirmPassword.textContent = '';
-
-if (!password.value.trim()) {
-    isValid = false;
-    errorPassword.textContent = 'Password is required.';
-} else {
-    const pNumber = /\d/;       // Check for a number
-    const pUpperCase = /[A-Z]/; // Check for an uppercase letter
-    const pLowerCase = /[a-z]/; // Check for a lowercase letter
-    const pSpecialChar = /[@$!%*?&]/; // Check for a special character
-    const pValidLength = password.value.length >= 8;  // Check for minimum length
-
-    let passwordValid = true;
-    let messages = [];
-
-    if (!pValidLength) {
-        passwordValid = false;
-        messages.push('Password must be at least 8 characters long.');
-    }
-    if (!pNumber.test(password.value)) {
-        passwordValid = false;
-        messages.push('Password must contain at least one number.');
-    }
-    if (!pUpperCase.test(password.value)) {
-        passwordValid = false;
-        messages.push('Password must contain at least one uppercase letter.');
-    }
-    if (!pLowerCase.test(password.value)) {
-        passwordValid = false;
-        messages.push('Password must contain at least one lowercase letter.');
-    }
-    if (!pSpecialChar.test(password.value)) {
-        passwordValid = false;
-        messages.push('Password must contain at least one special character.');
-    }
-
-    if (!passwordValid) {
-        isValid = false;
-        errorPassword.innerHTML = messages.join('<br>'); // Show all error messages
-    }
-
-    // Check if passwords match
-    if (password.value !== confirmPassword.value) {
-        isValid = false;
-        errorConfirmPassword.textContent = 'Passwords do not match.';
-    }
-   
-}
-
-
-
-            // Validate Agree Terms
+   // Validate Agree Terms
             const agreeTerms = document.getElementById('agreeTerms');
             if (!agreeTerms.checked) {
                 isValid = false;
@@ -444,7 +400,100 @@ document.getElementById('registrationForm').addEventListener('submit', function 
             errorRole.textContent = 'Please select a valid role.';
         }
     });
+    
+//password 
+const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const errorPassword = document.getElementById('errorPassword');
+        const errorConfirmPassword = document.getElementById('errorConfirmPassword');
 
+        function validatePassword() {
+            errorPassword.innerHTML = '';
+            const pNumber = /\d/;       // Check for a number
+            const pUpperCase = /[A-Z]/; // Check for an uppercase letter
+            const pLowerCase = /[a-z]/; // Check for a lowercase letter
+            const pSpecialChar = /[@$!%*?&]/; // Check for a special character
+            const pValidLength = password.value.length >= 8;  // Check for minimum length
+
+            let passwordValid = true;
+            let messages = [];
+if(password.value.trim() === '') {
+                passwordValid = false;
+                messages.push('<span style="color:red;">✗ Password is required.</span>');
+}
+else{
+    messages.push('<span style="color:green;">✓ Password is required.</span>');
+}
+                if (!pValidLength) {
+                passwordValid = false;
+                messages.push('<span style="color:red;">✗ Password must be at least 8 characters long.</span>');
+            } else {
+                messages.push('<span style="color:green;">✓ Password contains at least 8 characters.</span>');
+            }
+
+            if (!pNumber.test(password.value)) {
+                passwordValid = false;
+                messages.push('<span style="color:red;">✗ Password must contain at least one number.</span>');
+            } else {
+                messages.push('<span style="color:green;">✓ Password contains at least one number.</span>');
+            }
+
+            if (!pUpperCase.test(password.value)) {
+                passwordValid = false;
+                messages.push('<span style="color:red;">✗ Password must contain at least one uppercase letter.</span>');
+            } else {
+                messages.push('<span style="color:green;">✓ Password contains at least one uppercase letter.</span>');
+            }
+
+            if (!pLowerCase.test(password.value)) {
+                passwordValid = false;
+                messages.push('<span style="color:red;">✗ Password must contain at least one lowercase letter.</span>');
+            } else {
+                messages.push('<span style="color:green;">✓ Password contains at least one lowercase letter.</span>');
+            }
+
+            if (!pSpecialChar.test(password.value)) {
+                passwordValid = false;
+                messages.push('<span style="color:red;">✗ Password must contain at least one special character.</span>');
+            } else {
+                messages.push('<span style="color:green;">✓ Password contains at least one special character.</span>');
+            }
+
+
+            errorPassword.innerHTML = messages.join('<br>');
+        }
+
+        function validateConfirmPassword() {
+            errorConfirmPassword.innerHTML = '';
+            if (confirmPassword.value.trim() === '') {
+                errorConfirmPassword.textContent = 'Please confirm your password.';
+            } else if (password.value !== confirmPassword.value) {
+                errorConfirmPassword.textContent = '✗ Passwords do not match.';
+            } else {
+                errorConfirmPassword.innerHTML = '<span style="color:green;">✓ Passwords match.</span>';
+            }
+        }
+
+        // Add event listeners for real-time validation
+        password.addEventListener('input', validatePassword);
+        confirmPassword.addEventListener('input', validateConfirmPassword);
+
+        // Final validation on form submission
+//     document.getElementById('registrationForm').addEventListener('submit', function (e) {
+//     e.preventDefault(); // Prevent form submission
+//     validatePassword();
+//     validateConfirmPassword();
+//     if (!errorPassword.textContent && !errorConfirmPassword.textContent) {
+//         submit(); // Submit the form if all validations pass
+//     }
+// });
+e.preventDefault(); 
+        
+validatePassword();
+   validateConfirmPassword();
+
+
+//passeord ends
     </script>
     </div>
 </body>

@@ -24,27 +24,43 @@
         body.loading #loadingGif {
             display: block;
         }
-        #quizTimer {
-    position: fixed;
-    top: 10px;
-    right: 740px;
-    background: #f44336;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: bold;
-    z-index: 1000;
-}
-
+        #timer {
+            position: fixed;
+            margin-left: 600px;
+            background: #5a415c;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top:-140px;
+        }
+        .content-shifted {
+            margin-left: 520px;
+            margin-top: 131px;
+            color: red;
+        }
+        .back-btn {
+            align-items: center;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            margin-left: 600px;
+            border: none;
+            background: #be162e;
+        }
+        .back-btn a {
+            text-decoration: none;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
     
 <!-- 
 <img id="loadingGif" src="animation.gif" alt="Loading..."> -->
-
-<div id="quizTimer">Time Left: 10:00</div>
+<div id="timer">10:00</div>
 <div id="quizContent">
 <?php
 include("db.php");
@@ -67,7 +83,8 @@ $attemptedQuestionIds = array_column($attemptedQuestions, 'ques_id');
 
 // Check if the user has attempted all 10 questions
 if (count($attemptedQuestionIds) >= 10) {
-    echo "<p>You have already submitted the quiz.</p>";
+    print_r("<p class='content-shifted'>You have already submitted the quiz.</p><br>
+    <button class='back-btn'><a href='profile.php'>go back</a></button>");
     exit();
 }
 
@@ -91,7 +108,7 @@ if (!$result) {
 
 $questions = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-echo '<form id="quizForm" method="POST" action="insertResult.php" class="quizform">';
+echo '<form id="quizForm" method="POST" action="insertResult.php" onclick="startTimer()" class="quizform">';
 
 foreach ($questions as $index => $q) {                                                    
     echo "<p>Q" . ($index + 1) . ". " . $q['question'] . "</p>";    
@@ -162,20 +179,19 @@ function shuffleOptions($correct_a, $incorrectOptions)
 
 <!-- animation for submit button starts script -->
 
-   <script>
+<script>
         document.addEventListener('DOMContentLoaded', function () {
-            const timerElement = document.getElementById('quizTimer');
             const quizContent = document.getElementById('quizContent');
-            
-            // Fetch the quiz content dynamically
+
+            // Fetch quiz content
             fetch('take_quiz.php')
                 .then(response => response.text())
                 .then(data => {
-                    if (data.includes("already completed")) {
+                    if (data.includes("already submitted")) {
                         quizContent.innerHTML = data;
                     } else {
                         quizContent.innerHTML = data;
-                        startTimer();
+                        startTimer(); // Start the timer once quiz content is loaded
                     }
                 })
                 .catch(error => {
@@ -183,30 +199,37 @@ function shuffleOptions($correct_a, $incorrectOptions)
                     console.error('Error fetching quiz:', error);
                 });
 
+            // Timer variables
+            let timeRemaining = 10 * 60; // 10 minutes in seconds
+
+            // Function to format time as mm:ss
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+         return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        
+            }
+            console.log(sec,minutes);
+
+            // Function to start the timer
             function startTimer() {
-                let totalTime = 10 * 60; // 10 minutes in seconds
-                timerElement.style.display = 'block'; // Show timer
-
-                function updateTimerDisplay() {
-                    const minutes = Math.floor(totalTime / 60);
-                    const seconds = totalTime % 60;
-                    timerElement.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-                }
-
-                const timerInterval = setInterval(() => {
-                    totalTime--;
-                    updateTimerDisplay();
-
-                    if (totalTime <= 0) {
-                        clearInterval(timerInterval);
-                        alert("Time's up! Submitting the quiz.");
-                        document.getElementById('quizForm').submit(); // Auto-submit the form
+                const timerElement = document.getElementById('timer');
+                const interval = setInterval(() => {
+                    if (timeRemaining <= 0) {
+                        clearInterval(interval);
+                        timerElement.textContent = 'Time\'s Up!';
+                        alert('Time is up! Your quiz will now be submitted automatically.');
+                        document.getElementById('quizForm').submit(); // Automatically submit the form
+                    } else {
+                        timerElement.textContent = `Time Left: ${formatTime(timeRemaining)}`;
+                        timeRemaining--;
                     }
                 }, 1000);
-
-                updateTimerDisplay();
             }
+            
         });
+        // Start the timer when the page loads   
+
     </script>
 
 

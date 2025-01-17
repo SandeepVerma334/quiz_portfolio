@@ -46,7 +46,9 @@ $role = $_SESSION['role']; // Use the role directly from the session
     <div class="sidebar containerslide" id="sidebar">
     <nav>
     <div class="slide_logo">
+    <a href="dashboard.php" class="logo-link">
         <img src="logo3.png" alt="logo" width="100px">
+</a>
     </div>
 </nav>
         <h3>Dashboard</h3>
@@ -60,18 +62,18 @@ $role = $_SESSION['role']; // Use the role directly from the session
                 <li>
                 <button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button>
 </li>
-<!-- <ol>
+<ol>
     <li><a href="https://github.com" class="github"><i class="fab fa-github"></i></a></li>
     <li><a href="https://linkedin.com" class="linkedin"><i class="fab fa-linkedin"></i></a></li>
     <li><a href="https://facebook.com" class="facebook"><i class="fab fa-facebook"></i></a></li>
-</ol> -->
+</ol>
             
 
             <?php else: ?>
                
                 <li><a href="#" id="profileLink">Profile</a></li>
                
-                <li><a href="#" id="takeQuizLink" id="startBtn">Take Quiz</a></li>
+                <li><a href="#" id="takeQuizLink" >Take Quiz</a></li>
                 <li><a href="#" id="quizResult">Results</a></li>
                 <li><button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button></li>
                 <ol>
