@@ -406,7 +406,9 @@ const password = document.getElementById('password');
         const confirmPassword = document.getElementById('confirmPassword');
         const errorPassword = document.getElementById('errorPassword');
         const errorConfirmPassword = document.getElementById('errorConfirmPassword');
+ 
 
+        
         function validatePassword() {
             errorPassword.innerHTML = '';
             const pNumber = /\d/;       // Check for a number
@@ -417,13 +419,9 @@ const password = document.getElementById('password');
 
             let passwordValid = true;
             let messages = [];
-if(password.value.trim() === '') {
-                passwordValid = false;
-                messages.push('<span style="color:red;">✗ Password is required.</span>');
-}
-else{
-    messages.push('<span style="color:green;">✓ Password is required.</span>');
-}
+
+            
+
                 if (!pValidLength) {
                 passwordValid = false;
                 messages.push('<span style="color:red;">✗ Password must be at least 8 characters long.</span>');
@@ -459,9 +457,10 @@ else{
                 messages.push('<span style="color:green;">✓ Password contains at least one special character.</span>');
             }
 
-
+        
             errorPassword.innerHTML = messages.join('<br>');
         }
+    
 
         function validateConfirmPassword() {
             errorConfirmPassword.innerHTML = '';
@@ -473,11 +472,12 @@ else{
                 errorConfirmPassword.innerHTML = '<span style="color:green;">✓ Passwords match.</span>';
             }
         }
-
+    
         // Add event listeners for real-time validation
         password.addEventListener('input', validatePassword);
+       
         confirmPassword.addEventListener('input', validateConfirmPassword);
-
+        
         // Final validation on form submission
 //     document.getElementById('registrationForm').addEventListener('submit', function (e) {
 //     e.preventDefault(); // Prevent form submission
@@ -487,11 +487,12 @@ else{
 //         submit(); // Submit the form if all validations pass
 //     }
 // });
+    
 e.preventDefault(); 
-        
+passreq();      
 validatePassword();
    validateConfirmPassword();
-
+    
 
 //passeord ends
     </script>

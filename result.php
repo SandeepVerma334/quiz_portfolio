@@ -105,7 +105,7 @@ $serialNumber = 1;
             </table>
             <p class="result_info">Total Score: <strong><?php echo $score . " / " . $maxScore; ?></strong></p>
         <?php else: ?>
-            <p class="result_info">No quiz attempt found. Please take the quiz to see your results.</p>
+            <p class="result_attempt_info">No quiz attempt found. Please take the quiz to see your results.</p>
         <?php endif; ?>
     </div>
 

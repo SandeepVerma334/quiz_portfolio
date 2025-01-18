@@ -33,7 +33,7 @@
             border-radius: 5px;
             font-size: 18px;
             font-weight: bold;
-            margin-top:-140px;
+            margin-top:-105px;
         }
         .content-shifted {
             margin-left: 520px;

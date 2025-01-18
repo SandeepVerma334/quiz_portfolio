@@ -88,6 +88,7 @@ label {
 .form-check-input {
     background-color: #ffffff; /* White background for checkboxes */
     border: 1px solid #ccc; /* Subtle border for checkboxes */
+    cursor: pointer;
 }
 nav {
     width: 100%;
@@ -184,6 +185,11 @@ nav .logo img {
     font-size: 25px;
     margin-top: 20px;
 }
+.result_attempt_info{
+    font-size: 20px;
+    margin-top: 70px;
+    text-align: center;
+}
 
 
 .toggle-button.cross::before {
@@ -237,9 +243,33 @@ nav .logo img {
 .content.shifted {
     margin-left: 270px;
     /* background-color: blue;
-} */
-}
+} */}
+    .filter_sec{
+        display: flex;
+       gap: 50px;
+        margin-top: 0px;
+    }
+  
 
+    #sortbtn1 {
+        margin-left: 500px;
+        height: 60px;
+    }
+    #sortbtn2 {
+        margin-left: -35px;
+        height: 60px;
+    }
+   
+.form-input{
+    width: 350px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    margin-top: 20px;
+   
+}
 /* slidbar styling ends */
 /* users table styling starts */
 /* Container Styling */
@@ -387,8 +417,10 @@ footer {
     text-align: center;
     margin-bottom: 20px;
     color: #000000;
-    
 }
+   
+    
+
 /* admin user all data end styling */
 /* profile page styling starts */
 
