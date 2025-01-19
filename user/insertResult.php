@@ -1,5 +1,5 @@
 <?php
-include("db.php");
+include("../config/db.php");
 session_start();
 
 // Check if the user is logged in
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <body>
             <div class='loader-section'>
                 <h2>Please Wait...</h2>
-                <video id='loadingVideo' src='confity.mp4' autoplay muted></video>
+                <video id='loadingVideo' src='../img/confity.mp4' autoplay muted></video>
             </div>
             <script type='text/javascript'>
                 setTimeout(function() {

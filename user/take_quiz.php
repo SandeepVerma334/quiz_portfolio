@@ -63,7 +63,7 @@
 <div id="timer">10:00</div>
 <div id="quizContent">
 <?php
-include("db.php");
+include("../config/db.php");
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
@@ -108,7 +108,7 @@ if (!$result) {
 
 $questions = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-echo '<form id="quizForm" method="POST" action="insertResult.php" onclick="startTimer()" class="quizform">';
+echo '<form id="quizForm" method="POST" action="user/insertResult.php" onclick="startTimer()" class="quizform">';
 
 foreach ($questions as $index => $q) {                                                    
     echo "<p>Q" . ($index + 1) . ". " . $q['question'] . "</p>";    

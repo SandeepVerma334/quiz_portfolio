@@ -9,7 +9,8 @@
     margin: 0;
     overflow-y: auto; */
 
-        background-image: url('download1.avif');
+    background-image: url('../img/download1.avif');
+
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
@@ -48,7 +49,38 @@ border-radius: 10px;
 padding: 10px;
 
 }
-
+.error {
+    color: red;
+    font-size: 0.875em;
+}
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    border: 1px solid #ced4da;
+    padding: 5px;
+    border-radius: 0.375rem;
+}
+.tag {
+    background-color: #e9ecef;
+    border-radius: 15px;
+    padding: 5px 10px;
+    font-size: 0.875em;
+    display: flex;
+    align-items: center;
+}
+.tag button {
+    background: none;
+    border: none;
+    font-size: 1em;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.tag-input {
+    flex: 1;
+    border: none;
+    outline: none;
+}
 .btn-primary {
     background-color: #5a415c; /* Soft blue button */
     border-color: #5a415c;
@@ -252,12 +284,14 @@ nav .logo img {
   
 
     #sortbtn1 {
-        margin-left: 500px;
+        margin-left: 730px;
         height: 60px;
+        margin-top: 40px;
     }
     #sortbtn2 {
-        margin-left: -35px;
+        margin-left: -43px;
         height: 60px;
+        margin-top: 40px;
     }
    
 .form-input{

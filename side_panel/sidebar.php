@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include("db.php");
+include("config/db.php");
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -23,7 +23,7 @@ $role = $_SESSION['role']; // Use the role directly from the session
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive User Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <style>
@@ -47,7 +47,7 @@ $role = $_SESSION['role']; // Use the role directly from the session
     <nav>
     <div class="slide_logo">
     <a href="dashboard.php" class="logo-link">
-        <img src="logo3.png" alt="logo" width="100px">
+        <img src="img/logo3.png" alt="logo" width="100px">
 </a>
     </div>
 </nav>
@@ -60,7 +60,7 @@ $role = $_SESSION['role']; // Use the role directly from the session
                 
                 <li><a href="#" id="usersLink">Users</a></li>
                 <li>
-                <button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button>
+                <button class="logout-btn" onclick="window.location.href='../logout/logout.php'">Logout</button>
 </li>
 <ol>
     <li><a href="https://github.com" class="github"><i class="fab fa-github"></i></a></li>
@@ -75,7 +75,7 @@ $role = $_SESSION['role']; // Use the role directly from the session
                
                 <li><a href="#" id="takeQuizLink" >Take Quiz</a></li>
                 <li><a href="#" id="quizResult">Results</a></li>
-                <li><button class="logout-btn" onclick="window.location.href='logout.php'">Logout</button></li>
+                <li><button class="logout-btn" onclick="window.location.href='logout/logout.php'">Logout</button></li>
                 <ol>
     <li><a href="https://github.com" class="github"><i class="fab fa-github"></i></a></li>
     <li><a href="https://linkedin.com" class="linkedin"><i class="fab fa-linkedin"></i></a></li>
@@ -169,7 +169,7 @@ if (profileLink) {
 if (usersLink) {
     usersLink.addEventListener('click', (e) => {
         e.preventDefault();
-        fetch('users.php')
+        fetch('admin/users.php')
             .then(response => response.text())
             .then(data => {
                 profileContent.innerHTML = data;
@@ -185,7 +185,7 @@ if (usersLink) {
 if (takeQuizLink) {
     takeQuizLink.addEventListener('click', (e) => {
         e.preventDefault();
-        fetch('take_quiz.php')
+        fetch('user/take_quiz.php')
             .then(response => response.text())
             .then(data => {
                 profileContent.innerHTML = data;
@@ -201,7 +201,7 @@ if (takeQuizLink) {
 if (quizResult) {
     quizResult.addEventListener('click', (e) => {
         e.preventDefault();
-        fetch('result.php')
+        fetch('user/result.php')
             .then(response => response.text())
             .then(data => {
                 profileContent.innerHTML = data;
