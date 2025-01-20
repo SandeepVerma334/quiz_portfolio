@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("db.php");
+include("config/db.php");
 
 // Handle form submission
 if (isset($_POST["submit"])) {
@@ -33,7 +33,7 @@ if (isset($_POST["submit"])) {
                 alert('Login successful. Redirecting to your dashboard...');
                 setTimeout(function() {
                     window.location.href = '$dashboard';
-                }, 2000);
+                }, 0000);
             </script>";
             exit();
         } else {
@@ -56,13 +56,13 @@ if (isset($_POST["submit"])) {
     <title>Login Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="favicon.ico" type="image/icon type">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
 <div class="body">
 <nav>
         <div class="logo">
-            <img src="logo3.png" alt="logo" width="100px">
+            <img src="img/logo3.png" alt="logo" width="100px">
         </div>
     </nav>
     <div class="container">
@@ -92,7 +92,7 @@ if (isset($_POST["submit"])) {
         </form>
 
         <div class="signup-link text-center mt-3">
-            <p style="color:#ffffff"  >Don't have an account? <a href="register.php">Sign Up</a></p>
+            <p style="color:#ffffff"  >Don't have an account? <a href="index.php">Sign Up</a></p>
         </div>
     </div>
 

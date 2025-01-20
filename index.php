@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include("db.php");
+include("config/db.php");
 if (isset($_POST['submit'])) {
     // Retrieve form data
     $first_name = $_POST['first_name'] ?? '';
@@ -72,48 +72,16 @@ if ($conn->query($iquery) === TRUE) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class Registration Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/style.css">
+
     <link rel="icon" href="favicon.ico" type="image/icon type">
-    <style>
-        .error {
-            color: red;
-            font-size: 0.875em;
-        }
-        .tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            border: 1px solid #ced4da;
-            padding: 5px;
-            border-radius: 0.375rem;
-        }
-        .tag {
-            background-color: #e9ecef;
-            border-radius: 15px;
-            padding: 5px 10px;
-            font-size: 0.875em;
-            display: flex;
-            align-items: center;
-        }
-        .tag button {
-            background: none;
-            border: none;
-            font-size: 1em;
-            margin-left: 5px;
-            cursor: pointer;
-        }
-        .tag-input {
-            flex: 1;
-            border: none;
-            outline: none;
-        }
-    </style>
+   
 </head>
 <body>
     <div class="body">
     <nav>
         <div class="logo">
-            <img src="logo3.png" alt="logo" width="100px">
+            <img src="img\logo3.png" alt="logo" width="100px">
         </div>
     </nav>
     <div class="container">
@@ -216,7 +184,7 @@ if ($conn->query($iquery) === TRUE) {
         <!-- Terms and Conditions -->
         <div class="mb-3 form-check">
             <input type="checkbox" name="agree" class="form-check-input" id="agreeTerms">
-            <label class="form-check-label" for="agreeTerms">I agree to the <a href="#">terms and conditions</a></label>
+            <label class="form-check-label" for="agreeTerms">I agree to the <a href="#">terms and conditions</a></label><br>
             <span class="error" id="errorAgree"></span>
         </div>
 
@@ -300,7 +268,6 @@ document.getElementById('registrationForm').addEventListener('submit', function 
                 document.getElementById('errorFirstName').textContent = 'First Name is required.';
             }
 
-            // Validate Email
 // Validate Email
 const email = document.getElementById('email');
 const errorEmail = document.getElementById('errorEmail');
@@ -308,10 +275,26 @@ const errorEmail = document.getElementById('errorEmail');
 // Clear previous error
 errorEmail.textContent = '';
 
-if (!email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+// Convert email value to lowercase
+const emailValue = email.value.trim().toLowerCase();
+email.value = emailValue; // Update the input field value to lowercase
+
+// Validate email
+if (!emailValue) {
     isValid = false;
-    errorEmail.textContent = ' Enter a vaild Email Address.';
-} 
+    errorEmail.textContent = 'Email is required.';
+} else if (!emailValue.includes('@')) {
+    isValid = false;
+    errorEmail.textContent = 'Email must contain "@" symbol.';
+} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+    isValid = false;
+    errorEmail.textContent = 'Please enter a valid email address.';
+} else if (emailValue.length > 50) {
+    isValid = false;
+    errorEmail.textContent = 'Email is too long.';
+} else {
+    errorEmail.textContent = ''; // No error
+}
 
 
 
@@ -322,66 +305,7 @@ if (!email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()
                 errorTags.textContent = 'At least one tag is required.';
             }
 
-            // Validate Passwords
-            const password = document.getElementById('password');
-const confirmPassword = document.getElementById('confirmPassword');
-const errorPassword = document.getElementById('errorPassword');
-const errorConfirmPassword = document.getElementById('errorConfirmPassword');
-
-// Clear previous errors
-errorPassword.textContent = '';
-errorConfirmPassword.textContent = '';
-
-if (!password.value.trim()) {
-    isValid = false;
-    errorPassword.textContent = 'Password is required.';
-} else {
-    const pNumber = /\d/;       // Check for a number
-    const pUpperCase = /[A-Z]/; // Check for an uppercase letter
-    const pLowerCase = /[a-z]/; // Check for a lowercase letter
-    const pSpecialChar = /[@$!%*?&]/; // Check for a special character
-    const pValidLength = password.value.length >= 8;  // Check for minimum length
-
-    let passwordValid = true;
-    let messages = [];
-
-    if (!pValidLength) {
-        passwordValid = false;
-        messages.push('Password must be at least 8 characters long.');
-    }
-    if (!pNumber.test(password.value)) {
-        passwordValid = false;
-        messages.push('Password must contain at least one number.');
-    }
-    if (!pUpperCase.test(password.value)) {
-        passwordValid = false;
-        messages.push('Password must contain at least one uppercase letter.');
-    }
-    if (!pLowerCase.test(password.value)) {
-        passwordValid = false;
-        messages.push('Password must contain at least one lowercase letter.');
-    }
-    if (!pSpecialChar.test(password.value)) {
-        passwordValid = false;
-        messages.push('Password must contain at least one special character.');
-    }
-
-    if (!passwordValid) {
-        isValid = false;
-        errorPassword.innerHTML = messages.join('<br>'); // Show all error messages
-    }
-
-    // Check if passwords match
-    if (password.value !== confirmPassword.value) {
-        isValid = false;
-        errorConfirmPassword.textContent = 'Passwords do not match.';
-    }
-   
-}
-
-
-
-            // Validate Agree Terms
+   // Validate Agree Terms
             const agreeTerms = document.getElementById('agreeTerms');
             if (!agreeTerms.checked) {
                 isValid = false;
@@ -444,7 +368,98 @@ document.getElementById('registrationForm').addEventListener('submit', function 
             errorRole.textContent = 'Please select a valid role.';
         }
     });
+    
+//password 
+const password = document.getElementById('password');
+const confirmPassword = document.getElementById('confirmPassword');
+const errorPassword = document.getElementById('errorPassword');
+const errorConfirmPassword = document.getElementById('errorConfirmPassword');
 
+function validatePassword() {
+    errorPassword.innerHTML = ''; // Clear previous errors
+
+    if (password.value.trim() === '') {
+        errorPassword.textContent = 'Password is required.';
+        return; // Exit the function to prevent other validations
+    }
+
+    const pNumber = /\d/;       // Check for a number
+    const pUpperCase = /[A-Z]/; // Check for an uppercase letter
+    const pLowerCase = /[a-z]/; // Check for a lowercase letter
+    const pSpecialChar = /[@$!%*?&]/; // Check for a special character
+    const pValidLength = password.value.length >= 8;  // Check for minimum length
+
+    let messages = [];
+    let passwordValid = true;
+
+    if (!pValidLength) {
+        passwordValid = false;
+        messages.push('<span style="color:red;">✗ Password must be at least 8 characters long.</span>');
+    } else {
+        messages.push('<span style="color:green;">✓ Password contains at least 8 characters.</span>');
+    }
+
+    if (!pNumber.test(password.value)) {
+        passwordValid = false;
+        messages.push('<span style="color:red;">✗ Password must contain at least one number.</span>');
+    } else {
+        messages.push('<span style="color:green;">✓ Password contains at least one number.</span>');
+    }
+
+    if (!pUpperCase.test(password.value)) {
+        passwordValid = false;
+        messages.push('<span style="color:red;">✗ Password must contain at least one uppercase letter.</span>');
+    } else {
+        messages.push('<span style="color:green;">✓ Password contains at least one uppercase letter.</span>');
+    }
+
+    if (!pLowerCase.test(password.value)) {
+        passwordValid = false;
+        messages.push('<span style="color:red;">✗ Password must contain at least one lowercase letter.</span>');
+    } else {
+        messages.push('<span style="color:green;">✓ Password contains at least one lowercase letter.</span>');
+    }
+
+    if (!pSpecialChar.test(password.value)) {
+        passwordValid = false;
+        messages.push('<span style="color:red;">✗ Password must contain at least one special character.</span>');
+    } else {
+        messages.push('<span style="color:green;">✓ Password contains at least one special character.</span>');
+    }
+
+    errorPassword.innerHTML = messages.join('<br>');
+}
+
+function validateConfirmPassword() {
+    errorConfirmPassword.innerHTML = ''; // Clear previous errors
+
+    if (confirmPassword.value.trim() === '') {
+        errorConfirmPassword.textContent = 'Please confirm your password.';
+        return; // Exit the function
+    }
+
+    if (password.value !== confirmPassword.value) {
+        errorConfirmPassword.textContent = '✗ Passwords do not match.';
+    } else {
+        errorConfirmPassword.innerHTML = '<span style="color:green;">✓ Passwords match.</span>';
+    }
+}
+
+// Event Listeners for Real-Time Validation
+password.addEventListener('input', validatePassword);
+confirmPassword.addEventListener('input', validateConfirmPassword);
+
+// Final validation on form submission
+document.getElementById('registrationForm').addEventListener('submit', function (e) {
+    validatePassword();
+    validateConfirmPassword();
+
+    if (errorPassword.textContent || errorConfirmPassword.textContent) {
+        e.preventDefault(); // Prevent form submission if there are errors
+    }
+});
+
+//passeord ends
     </script>
     </div>
 </body>

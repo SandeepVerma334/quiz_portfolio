@@ -9,7 +9,8 @@
     margin: 0;
     overflow-y: auto; */
 
-        background-image: url('download1.avif');
+    background-image: url('../img/download1.avif');
+
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
@@ -38,6 +39,9 @@
     border-radius: 10px; /* Rounded corners */
    
   }
+  h2{
+    text-align: center;
+  }
 .subtitle {
 background-color: #9cb416;
 color: white;
@@ -45,7 +49,38 @@ border-radius: 10px;
 padding: 10px;
 
 }
-
+.error {
+    color: red;
+    font-size: 0.875em;
+}
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    border: 1px solid #ced4da;
+    padding: 5px;
+    border-radius: 0.375rem;
+}
+.tag {
+    background-color: #e9ecef;
+    border-radius: 15px;
+    padding: 5px 10px;
+    font-size: 0.875em;
+    display: flex;
+    align-items: center;
+}
+.tag button {
+    background: none;
+    border: none;
+    font-size: 1em;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.tag-input {
+    flex: 1;
+    border: none;
+    outline: none;
+}
 .btn-primary {
     background-color: #5a415c; /* Soft blue button */
     border-color: #5a415c;
@@ -85,6 +120,7 @@ label {
 .form-check-input {
     background-color: #ffffff; /* White background for checkboxes */
     border: 1px solid #ccc; /* Subtle border for checkboxes */
+    cursor: pointer;
 }
 nav {
     width: 100%;
@@ -181,6 +217,11 @@ nav .logo img {
     font-size: 25px;
     margin-top: 20px;
 }
+.result_attempt_info{
+    font-size: 20px;
+    margin-top: 70px;
+    text-align: center;
+}
 
 
 .toggle-button.cross::before {
@@ -234,9 +275,35 @@ nav .logo img {
 .content.shifted {
     margin-left: 270px;
     /* background-color: blue;
-} */
-}
+} */}
+    .filter_sec{
+        display: flex;
+       gap: 50px;
+        margin-top: 0px;
+    }
+  
 
+    #sortbtn1 {
+        margin-left: 730px;
+        height: 60px;
+        margin-top: 40px;
+    }
+    #sortbtn2 {
+        margin-left: -43px;
+        height: 60px;
+        margin-top: 40px;
+    }
+   
+.form-input{
+    width: 350px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    margin-top: 20px;
+   
+}
 /* slidbar styling ends */
 /* users table styling starts */
 /* Container Styling */
@@ -245,6 +312,10 @@ nav .logo img {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+.logo-link {
+    display: inline-block;
+    text-decoration: none; /* Remove underline if text is present */
 }
 nav .slide_logo img {
 
@@ -344,13 +415,22 @@ align-items: center;
 font-size: 30px;
 }
 .github  i{
-    color: #333; /* GitHub brand color (dark gray) */
+    color: #1877F2; /* GitHub brand color (dark gray) */
 }
 .linkedin i{
-    color: #0077B5; /* LinkedIn brand color (blue) */
+    color: #1877F2; /* LinkedIn brand color (blue) */
 }
 .facebook i{
     color: #1877F2; /* Facebook brand color (blue) */
+}
+.facebook i:hover{
+    color: #fff;
+}
+.github i:hover{
+    color: #fff;
+}
+.linkedin i:hover{
+    color: #fff;
 }
 
 
@@ -371,8 +451,10 @@ footer {
     text-align: center;
     margin-bottom: 20px;
     color: #000000;
-    
 }
+   
+    
+
 /* admin user all data end styling */
 /* profile page styling starts */
 

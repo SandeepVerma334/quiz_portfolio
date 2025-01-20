@@ -1,5 +1,5 @@
 <?php
-include("db.php");
+include("../config/db.php");
 session_start();
 
 // Check if user is logged in
@@ -56,6 +56,7 @@ $score -= $wrongCount * $penaltyPerWrongAnswer;
 $maxScore = 1.5 * 10;
 
 $totalQuestions = count($questionsData);
+$serialNumber = 1;
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +78,7 @@ $totalQuestions = count($questionsData);
             <table>
                 <thead>
                     <tr>
-                        <th>Result ID</th>
+                        <th>Sr no.</th>
                         <th>Question</th>
                         <th>Your Answer</th>
                         <th>Correct Answer</th>
@@ -88,7 +89,7 @@ $totalQuestions = count($questionsData);
                 <tbody>
                     <?php foreach ($questionsData as $data): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($data['result_id']); ?></td>
+                            <td><?php echo $serialNumber++; ?></td>
                             <td><?php echo htmlspecialchars($data['question']); ?></td>
                             <td><?php echo htmlspecialchars($data['user_ans']); ?></td>
                             <td><?php echo htmlspecialchars($data['correct_ans']); ?></td>
@@ -104,7 +105,7 @@ $totalQuestions = count($questionsData);
             </table>
             <p class="result_info">Total Score: <strong><?php echo $score . " / " . $maxScore; ?></strong></p>
         <?php else: ?>
-            <p class="result_info">No quiz attempt found. Please take the quiz to see your results.</p>
+            <p class="result_attempt_info">No quiz attempt found. Please take the quiz to see your results.</p>
         <?php endif; ?>
     </div>
 

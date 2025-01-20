@@ -1,5 +1,5 @@
 <?php
-include("db.php");
+include("../config/db.php");
 session_start();
 
 // Check if user is logged in
@@ -156,7 +156,7 @@ $totalQuestions = count($questionsData);
     <script type="text/javascript">
         // Redirect to the dashboard after 3 seconds
         setTimeout(function() {
-            window.location.href = 'dashboard.php'; // Change this to the actual dashboard page URL
+            window.location.href = '../dashboard.php'; // Change this to the actual dashboard page URL
         }, 3000); 
     </script>
 </body>
