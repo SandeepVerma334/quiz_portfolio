@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $role = $_SESSION['role']; // Use the role directly from the session
 
-// Debugging purpose (optional, remove in production)
+// Debugging purpose  (optional, remove in production)
 // print_r($_SESSION);
 
 ?>
