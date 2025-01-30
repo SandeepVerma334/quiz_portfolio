@@ -33,7 +33,7 @@ if (isset($_POST["submit"])) {
                 alert('Login successful. Redirecting to your dashboard...');
                 setTimeout(function() {
                     window.location.href = '$dashboard';
-                }, 0000);
+                }, 1000);
             </script>";
             exit();
         } else {
